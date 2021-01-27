@@ -1,61 +1,93 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
+using Cursor = UnityEngine.Cursor;
 
-[ExecuteAlways]
 public class CameraController : MonoBehaviour
 {
-    public Vector3 m_center = new Vector3(0, 0, 0);
-    public float m_radius = 20;
-    public float m_height = 20;
     public float m_speed = 2.5f;
+    public float m_sensitivity = 10;
+    [Range(0, 89)] public float m_rotationLockY = 89f;
 
-    private float m_offset = 0;
-    private bool m_moved = false;
+    private bool m_mouseGrabbed = false;
+    private float m_rotationY = 0;
 
     private void Start()
     {
-    }
-
-    private void Awake()
-    {
-        m_moved = true;
-    }
-
-    private void OnValidate()
-    {
-        m_moved = true;
+        ToggleMouseGrab();
     }
 
     private void Update()
     {
-        float deltaX = Input.GetAxis("Horizontal");
-        float deltaY = Input.GetAxis("Vertical");
+        MoveCamera();
+        RotateCamera();
 
-        if (deltaX != 0.0f)
+        if (Input.GetKeyUp(KeyCode.Escape))
+            ToggleMouseGrab();
+
+#if UNITY_EDITOR
+        if (Input.GetMouseButtonUp(0) && UnityEditor.EditorApplication.isPlaying)
         {
-            m_moved = true;
-            m_offset += deltaX * m_speed * Time.deltaTime;
+            ToggleMouseGrab(true);
+        }
+#endif
+    }
+
+    private void MoveCamera()
+    {
+        var speed = m_speed * Time.deltaTime;
+
+        var dx = Input.GetAxis("Horizontal") * speed;
+        var dy = Input.GetAxis("Vertical") * speed;
+        var dh = Input.GetAxis("Height") * speed;
+
+        if (dx != 0 || dy != 0)
+        {
+            transform.Translate(new Vector3(dx, 0, dy), Space.Self);
         }
 
-        if (deltaY != 0.0f)
+        if (dh != 0)
         {
-            //m_moved = true;
-            //m_radius += deltaY * m_speed * 5.0f * Time.deltaTime;
-            //m_radius = Mathf.Clamp(m_radius, 5, 50);
+            transform.Translate(new Vector3(0, dh, 0), Space.World);
         }
     }
 
-    private void LateUpdate()
+    private void RotateCamera()
     {
-        if (m_moved)
+        if (!m_mouseGrabbed)
+            return;
+
+        var sensitivity = m_sensitivity * Time.deltaTime;
+        var rx = Input.GetAxis("Mouse X") * sensitivity;
+        var ry = Input.GetAxis("Mouse Y") * sensitivity;
+        var yOrigin = transform.localEulerAngles.y;
+
+        if (rx != 0 && ry != 0)
         {
-            m_moved = false;
-            transform.position = new Vector3(
-                Mathf.Cos(m_offset) * m_radius,
-                m_height,
-                Mathf.Sin(m_offset) * m_radius);
-            transform.LookAt(m_center);
+            m_rotationY += ry;
+            m_rotationY = Mathf.Clamp(m_rotationY, -m_rotationLockY, m_rotationLockY);
+
+            transform.localEulerAngles = new Vector3(-m_rotationY, yOrigin + rx, 0);
         }
+        else if (rx != 0)
+        {
+            transform.Rotate(0, rx, 0);
+        }
+        else if (ry != 0)
+        {
+            m_rotationY += ry;
+            m_rotationY = Mathf.Clamp(m_rotationY, -m_rotationLockY, m_rotationLockY);
+
+            transform.localEulerAngles = new Vector3(-m_rotationY, yOrigin, 0);
+        }
+    }
+
+    private void ToggleMouseGrab(bool? forcedValue = null)
+    {
+        m_mouseGrabbed = forcedValue ?? !m_mouseGrabbed;
+        Cursor.visible = !m_mouseGrabbed;
+        Cursor.lockState = m_mouseGrabbed ? CursorLockMode.Locked : CursorLockMode.None;
     }
 }
