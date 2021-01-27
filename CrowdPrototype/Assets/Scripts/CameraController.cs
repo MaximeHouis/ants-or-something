@@ -12,7 +12,6 @@ public class CameraController : MonoBehaviour
     [Range(0, 89)] public float m_rotationLockY = 89f;
 
     private bool m_mouseGrabbed = false;
-    private float m_rotationY = 0;
 
     private void Start()
     {
@@ -60,28 +59,11 @@ public class CameraController : MonoBehaviour
             return;
 
         var sensitivity = m_sensitivity * Time.deltaTime;
-        var rx = Input.GetAxis("Mouse X") * sensitivity;
-        var ry = Input.GetAxis("Mouse Y") * sensitivity;
-        var yOrigin = transform.localEulerAngles.y;
+        var localRotation = transform.localEulerAngles;
+        var rx = localRotation.y + Input.GetAxis("Mouse X") * sensitivity;
+        var ry = localRotation.x - Input.GetAxis("Mouse Y") * sensitivity;
 
-        if (rx != 0 && ry != 0)
-        {
-            m_rotationY += ry;
-            m_rotationY = Mathf.Clamp(m_rotationY, -m_rotationLockY, m_rotationLockY);
-
-            transform.localEulerAngles = new Vector3(-m_rotationY, yOrigin + rx, 0);
-        }
-        else if (rx != 0)
-        {
-            transform.Rotate(0, rx, 0);
-        }
-        else if (ry != 0)
-        {
-            m_rotationY += ry;
-            m_rotationY = Mathf.Clamp(m_rotationY, -m_rotationLockY, m_rotationLockY);
-
-            transform.localEulerAngles = new Vector3(-m_rotationY, yOrigin, 0);
-        }
+        transform.localEulerAngles = new Vector3(ry, rx, 0.0f);
     }
 
     private void ToggleMouseGrab(bool? forcedValue = null)
