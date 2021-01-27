@@ -28,7 +28,7 @@ public class CameraController : MonoBehaviour
             ToggleMouseGrab();
 
 #if UNITY_EDITOR
-        if (Input.GetMouseButtonUp(0) && UnityEditor.EditorApplication.isPlaying)
+        if (Input.GetMouseButtonUp(0) && !m_mouseGrabbed)
         {
             ToggleMouseGrab(true);
         }
