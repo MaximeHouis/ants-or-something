@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UIElements;
 
 [RequireComponent(typeof(BoxCollider))]
-public class AntSpawner : MonoBehaviour
+public class Spawner : MonoBehaviour
 {
     public GameObject m_entity;
     [Min(0)] public int m_count = 25;
