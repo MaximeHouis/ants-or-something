@@ -9,19 +9,24 @@ public class Spawner : MonoBehaviour
 {
     public GameObject m_entity;
     [CanBeNull] public GameObject m_objective;
-    
+    [CanBeNull] public List<GameObject> m_checkpoints;
+
     [Min(0)] public int m_count = 25;
     [Min(0)] public float m_range = 2.5f;
-
-    private GameObject m_group;
-    private BoxCollider m_spawnBox;
+    [Min(0)] public float m_intervalMilliseconds = 25.0f;
 
     private void Start()
     {
-        m_group = new GameObject("Ant Group");
-        m_spawnBox = GetComponent<BoxCollider>();
+        Spawn();
+    }
 
-        StartCoroutine(DoSpawn());
+    [ContextMenu("Call Spawn()")]
+    public void Spawn()
+    {
+        if (Application.isPlaying)
+            StartCoroutine(DoSpawn());
+        else
+            Debug.LogError("Cannot spawn entities as the game is not running.");
     }
 
     private IEnumerator DoSpawn()
@@ -29,10 +34,12 @@ public class Spawner : MonoBehaviour
         for (var i = 0; i < m_count; i++)
         {
             var pos = transform.position;
-            pos.x += Random.Range(-m_range, m_range);
-            pos.z += Random.Range(-m_range, m_range);
+            var offset = Utils.RandomPointInCircle(m_range);
 
-            var entity = Instantiate(m_entity, pos, Quaternion.identity, m_group.transform);
+            pos.x += offset.x;
+            pos.z += offset.y;
+
+            var entity = Instantiate(m_entity, pos, Quaternion.identity, transform);
             entity.name = "Ant #" + (i + 1);
 
             if (m_objective && m_entity.GetComponent<AntController>())
@@ -40,7 +47,7 @@ public class Spawner : MonoBehaviour
                 m_entity.GetComponent<AntController>().m_objective = m_objective;
             }
 
-            yield return new WaitForSeconds(0.025f);
+            yield return new WaitForSeconds(m_intervalMilliseconds / 1000.0f);
         }
     }
 }
