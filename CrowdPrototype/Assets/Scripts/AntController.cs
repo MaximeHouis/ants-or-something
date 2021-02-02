@@ -9,7 +9,7 @@ using UnityEngine.AI;
 public class AntController : MonoBehaviour
 {
     public static readonly List<AntController> s_instances = new List<AntController>();
-    
+
     [HideInInspector] public NavMeshAgent m_agent;
 
     private bool m_touchedGround = false;
@@ -18,7 +18,7 @@ public class AntController : MonoBehaviour
     private void Start()
     {
         s_instances.Add(this);
-        
+
         m_agent = GetComponent<NavMeshAgent>();
     }
 
@@ -33,9 +33,6 @@ public class AntController : MonoBehaviour
             return;
 
         m_touchedGround = true;
-
-        // Wait for a bit before setting the objective
-        // StartCoroutine(SetDestination(m_objective.transform.position));
     }
 
     public IEnumerator SetDestination(Vector3 dest)
@@ -44,6 +41,7 @@ public class AntController : MonoBehaviour
             yield return new WaitForSeconds(0.5f);
 
         m_agent.enabled = true;
+        m_agent.ResetPath(); // in case an old path was set
         m_agent.SetDestination(dest);
     }
 }

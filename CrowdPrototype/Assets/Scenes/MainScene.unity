@@ -409,7 +409,7 @@ GameObject:
   - component: {fileID: 145513588}
   - component: {fileID: 145513587}
   m_Layer: 0
-  m_Name: Cube (3)
+  m_Name: Obstacle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
@@ -423,7 +423,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 145513585}
   m_LocalRotation: {x: -0, y: 0.37876177, z: -0, w: 0.9254942}
-  m_LocalPosition: {x: -6.14, y: 0, z: 14.64}
+  m_LocalPosition: {x: -6.14, y: 0.5, z: 14.64}
   m_LocalScale: {x: 0.6666667, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1462458420}
@@ -2489,7 +2489,7 @@ GameObject:
   - component: {fileID: 549035713}
   - component: {fileID: 549035712}
   m_Layer: 0
-  m_Name: Cube (4)
+  m_Name: Obstacle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
@@ -2503,7 +2503,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 549035710}
   m_LocalRotation: {x: -0, y: 0.37876177, z: -0, w: 0.9254942}
-  m_LocalPosition: {x: -19.24, y: 0, z: 17.03}
+  m_LocalPosition: {x: -19.24, y: 0.5, z: 17.03}
   m_LocalScale: {x: 0.6666667, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1462458420}
@@ -3095,7 +3095,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1462458420}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!43 &678325064
 Mesh:
@@ -3366,7 +3366,7 @@ GameObject:
   - component: {fileID: 883327084}
   - component: {fileID: 883327083}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: Obstacle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
@@ -3380,11 +3380,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 883327081}
   m_LocalRotation: {x: -0, y: 0.37876177, z: -0, w: 0.9254942}
-  m_LocalPosition: {x: 12.84, y: 0, z: -12.56}
+  m_LocalPosition: {x: 12.84, y: 0.5, z: -12.56}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1462458420}
-  m_RootOrder: 7
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 44.514004, z: 0}
 --- !u!64 &883327083
 MeshCollider:
@@ -5679,9 +5679,9 @@ Transform:
   - {fileID: 487618583}
   - {fileID: 229387703}
   - {fileID: 977595589}
-  - {fileID: 883327082}
   - {fileID: 648709422}
   - {fileID: 1816745715}
+  - {fileID: 883327082}
   - {fileID: 145513586}
   - {fileID: 549035711}
   - {fileID: 135765372}
@@ -6340,7 +6340,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1462458420}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!43 &2041992029
 Mesh:
@@ -6679,6 +6679,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Objective
+      objectReference: {fileID: 0}
+    - target: {fileID: 3114698447213512203, guid: d0ba7c8256476764ea29fbfce04a40af,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3114698447213512207, guid: d0ba7c8256476764ea29fbfce04a40af,
         type: 3}
