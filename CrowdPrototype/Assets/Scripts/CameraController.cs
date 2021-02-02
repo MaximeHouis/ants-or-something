@@ -48,12 +48,12 @@ public class CameraController : MonoBehaviour
     {
         var ray = m_camera.ScreenPointToRay(Input.mousePosition);
 
-        if (Physics.Raycast(ray, out var hit))
+        if (!m_mouseGrabbed && Physics.Raycast(ray, out var hit))
         {
             m_targetIndicator.SetActive(true);
             m_targetIndicator.transform.position = hit.point;
 
-            if (Input.GetButtonDown("Fire1") && !m_mouseGrabbed)
+            if (Input.GetButtonDown("Fire1"))
             {
                 SetDestination(hit.point);
             }
@@ -71,13 +71,17 @@ public class CameraController : MonoBehaviour
         if (!m_mouseGrabbed)
             return;
 
-        var rx = Input.GetAxis("Mouse X") * m_sensitivity * Time.deltaTime;
+        var sensitivity = m_sensitivity * Time.deltaTime;
+        var rx = Input.GetAxis("Mouse X") * sensitivity;
+        var ry = Input.GetAxis("Mouse Y") * sensitivity;
 
-        if (rx == 0)
-            return;
+        if (rx != 0)
+            transform.RotateAround(m_centerAnchor, Vector3.up, rx);
+        // if (ry != 0)
+        //     transform.RotateAround(m_centerAnchor, Vector3.???, ry);
 
-        transform.RotateAround(m_centerAnchor, Vector3.up, rx);
-        transform.LookAt(m_centerAnchor);
+        if (rx != 0 || ry != 0)
+            transform.LookAt(m_centerAnchor);
     }
 
     private void SetDestination(Vector3 dest)

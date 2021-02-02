@@ -5,7 +5,6 @@ using UnityEngine;
 public class Spawner : MonoBehaviour
 {
     public GameObject m_entity;
-    public GameObject m_objective;
 
     [Min(0)]
     public int m_count = 25;
@@ -30,6 +29,7 @@ public class Spawner : MonoBehaviour
 
     private void OnDrawGizmos()
     {
+        Gizmos.color = Color.yellow;
         Gizmos.DrawWireCube(transform.position + m_collider.center, m_collider.size);
     }
 

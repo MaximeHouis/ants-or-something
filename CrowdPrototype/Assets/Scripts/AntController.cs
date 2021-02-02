@@ -11,7 +11,7 @@ public class AntController : MonoBehaviour
     [HideInInspector] public NavMeshAgent m_agent;
 
     private bool m_touchedGround = false;
-    private Vector3 m_destination;
+    private Vector3? m_destination = null;
 
     private void Start()
     {
@@ -23,6 +23,21 @@ public class AntController : MonoBehaviour
     private void OnDestroy()
     {
         s_instances.Remove(this);
+    }
+
+    private void LateUpdate()
+    {
+        if (!m_agent.isOnNavMesh)
+            return;
+
+        if (!m_destination.HasValue)
+            return;
+
+        if (Vector3.Distance(transform.position, (Vector3) m_destination) <= m_agent.stoppingDistance)
+        {
+            m_agent.ResetPath();
+            m_destination = null;
+        }
     }
 
     private void OnCollisionEnter(Collision _)
@@ -41,5 +56,7 @@ public class AntController : MonoBehaviour
         m_agent.enabled = true;
         m_agent.ResetPath(); // in case an old path was set
         m_agent.SetDestination(dest);
+
+        m_destination = dest;
     }
 }
