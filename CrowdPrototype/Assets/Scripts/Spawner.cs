@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using JetBrains.Annotations;
-using UnityEditor;
+﻿using System.Collections;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 [RequireComponent(typeof(BoxCollider))]
 public class Spawner : MonoBehaviour
 {
     public GameObject m_entity;
-    [CanBeNull] public GameObject m_objective;
+    public GameObject m_objective;
 
     [Min(0)]
     public int m_count = 25;
