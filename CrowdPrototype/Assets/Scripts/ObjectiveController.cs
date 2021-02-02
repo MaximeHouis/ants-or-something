@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class ObjectiveController : MonoBehaviour
 {
@@ -14,7 +11,7 @@ public class ObjectiveController : MonoBehaviour
             Debug.Log("GameObject " + gameObject.name + " ignored");
             return;
         }
-        
+
         Destroy(other.gameObject);
     }
 }

@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class RandomScale : MonoBehaviour
 {
@@ -9,7 +7,7 @@ public class RandomScale : MonoBehaviour
 
     [Min(0)] public float m_Maximum = 1;
 
-    void Start()
+    private void Start()
     {
         transform.localScale = Random.Range(m_Minimum, m_Maximum) * Vector3.one;
     }
