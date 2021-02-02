@@ -15,11 +15,9 @@ public class Spawner : MonoBehaviour
 
     private float Interval => m_count != 0 ? m_duration / m_count : 0f;
     private BoxCollider m_collider;
-    private Camera m_camera;
 
     private void Start()
     {
-        m_camera = Camera.main;
         m_collider = GetComponent<BoxCollider>();
 
         Spawn();
@@ -46,8 +44,6 @@ public class Spawner : MonoBehaviour
 
     private IEnumerator DoSpawn()
     {
-        Debug.Log(Interval + "s");
-
         for (var i = 0; i < m_count; i++)
         {
             var pos = Utils.RandomPointInBox(m_collider);

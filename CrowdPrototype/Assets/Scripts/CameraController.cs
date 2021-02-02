@@ -3,54 +3,57 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
+    public Vector3 m_centerAnchor = Vector3.zero;
+    public float m_sensitivity = 100.0f;
     public GameObject m_targetIndicator;
-    public float m_speed = 2.5f;
-    public float m_sensitivity = 10;
-    [Range(0, 89.9f)] public float m_rotationLockY = 89.9f;
 
     private GameObject m_destinationIndicator;
     private Camera m_camera;
-    private bool m_mouseGrabbed = false;
+    private bool m_mouseGrabbed;
+
+    private bool MouseGrabbed
+    {
+        set
+        {
+            if (m_mouseGrabbed == value)
+                return;
+
+            m_mouseGrabbed = value;
+
+            Cursor.visible = !m_mouseGrabbed;
+            Cursor.lockState = m_mouseGrabbed ? CursorLockMode.Locked : CursorLockMode.None;
+        }
+    }
 
     private void Start()
     {
         m_camera = Camera.main;
+
+        if (!m_camera)
+            throw new NullReferenceException("No main camera");
 
         m_targetIndicator = Instantiate(m_targetIndicator, Vector3.zero, Quaternion.identity);
         m_targetIndicator.name = "Target";
 
         m_destinationIndicator = Instantiate(m_targetIndicator, Vector3.zero, Quaternion.identity);
         m_destinationIndicator.name = "Destination";
-
-        ToggleMouseGrab();
     }
 
     private void Update()
     {
-        MoveCamera();
         RotateCamera();
-
-        if (Input.GetKeyUp(KeyCode.Escape))
-            ToggleMouseGrab();
-
-#if UNITY_EDITOR
-        if (Input.GetMouseButtonUp(0) && !m_mouseGrabbed)
-        {
-            ToggleMouseGrab(true);
-        }
-#endif
     }
 
     private void LateUpdate()
     {
-        var ray = m_camera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0.0f));
+        var ray = m_camera.ScreenPointToRay(Input.mousePosition);
 
         if (Physics.Raycast(ray, out var hit))
         {
             m_targetIndicator.SetActive(true);
             m_targetIndicator.transform.position = hit.point;
 
-            if (Input.GetButtonDown("Fire1"))
+            if (Input.GetButtonDown("Fire1") && !m_mouseGrabbed)
             {
                 SetDestination(hit.point);
             }
@@ -61,36 +64,20 @@ public class CameraController : MonoBehaviour
         }
     }
 
-    private void MoveCamera()
-    {
-        var speed = m_speed * Time.deltaTime;
-
-        var dx = Input.GetAxis("Horizontal") * speed;
-        var dy = Input.GetAxis("Vertical") * speed;
-        var dh = Input.GetAxis("Height") * speed;
-
-        if (dx != 0 || dy != 0)
-        {
-            transform.Translate(new Vector3(dx, 0, dy), Space.Self);
-        }
-
-        if (dh != 0)
-        {
-            transform.Translate(new Vector3(0, dh, 0), Space.World);
-        }
-    }
-
     private void RotateCamera()
     {
+        MouseGrabbed = Input.GetButton("Fire2");
+
         if (!m_mouseGrabbed)
             return;
 
-        var sensitivity = m_sensitivity * Time.deltaTime;
-        var localRotation = transform.localEulerAngles;
-        var rx = localRotation.y + Input.GetAxis("Mouse X") * sensitivity;
-        var ry = localRotation.x - Input.GetAxis("Mouse Y") * sensitivity;
+        var rx = Input.GetAxis("Mouse X") * m_sensitivity * Time.deltaTime;
 
-        transform.localEulerAngles = new Vector3(ry, rx, 0.0f);
+        if (rx == 0)
+            return;
+
+        transform.RotateAround(m_centerAnchor, Vector3.up, rx);
+        transform.LookAt(m_centerAnchor);
     }
 
     private void SetDestination(Vector3 dest)
@@ -103,10 +90,14 @@ public class CameraController : MonoBehaviour
         m_destinationIndicator.transform.position = dest;
     }
 
-    private void ToggleMouseGrab(bool? forcedValue = null)
+    private void OnDrawGizmosSelected()
     {
-        m_mouseGrabbed = forcedValue ?? !m_mouseGrabbed;
-        Cursor.visible = !m_mouseGrabbed;
-        Cursor.lockState = m_mouseGrabbed ? CursorLockMode.Locked : CursorLockMode.None;
+        Gizmos.DrawLine(transform.position, m_centerAnchor);
+    }
+
+    [ContextMenu("Look At Anchor")]
+    public void LookAtAnchor()
+    {
+        transform.LookAt(m_centerAnchor);
     }
 }
