@@ -3759,9 +3759,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d86ac828a61eaa43a616386bcdfd595, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_targetIndicator: {fileID: 2623490878750638298, guid: dd2794a6762ef6243bc87cf72fedf005,
+    type: 3}
   m_speed: 15
   m_sensitivity: 200
-  m_rotationLockY: 89
+  m_rotationLockY: 89.9
 --- !u!1 &968462720
 GameObject:
   m_ObjectHideFlags: 0
@@ -5698,9 +5700,9 @@ GameObject:
   - component: {fileID: 1539517514}
   - component: {fileID: 1539517513}
   - component: {fileID: 1539517512}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Spawner
-  m_TagString: Untagged
+  m_TagString: Respawn
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -5720,10 +5722,8 @@ MonoBehaviour:
   m_entity: {fileID: 1811624112967672224, guid: fc7e1b116f0bec34bb90acd0435fc24a,
     type: 3}
   m_objective: {fileID: 492072178}
-  m_checkpoints: []
-  m_count: 500
-  m_range: 5
-  m_intervalMilliseconds: 10
+  m_count: 100
+  m_duration: 1
 --- !u!65 &1539517513
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5735,7 +5735,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 9, y: 1, z: 9}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!33 &1539517514
 MeshFilter:
@@ -5753,7 +5753,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1539517511}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 18, y: 3, z: 18}
+  m_LocalPosition: {x: 15.5, y: 0.59, z: 15.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

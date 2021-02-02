@@ -1,20 +1,32 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.UIElements;
 using Cursor = UnityEngine.Cursor;
 
 public class CameraController : MonoBehaviour
 {
+    public GameObject m_targetIndicator;
     public float m_speed = 2.5f;
     public float m_sensitivity = 10;
-    [Range(0, 89)] public float m_rotationLockY = 89f;
+    [Range(0, 89.9f)] public float m_rotationLockY = 89.9f;
 
+    private GameObject m_destinationIndicator;
+    private Camera m_camera;
     private bool m_mouseGrabbed = false;
 
     private void Start()
     {
+        m_camera = Camera.main;
+
+        m_targetIndicator = Instantiate(m_targetIndicator, Vector3.zero, Quaternion.identity);
+        m_targetIndicator.name = "Target";
+
+        m_destinationIndicator = Instantiate(m_targetIndicator, Vector3.zero, Quaternion.identity);
+        m_destinationIndicator.name = "Destination";
+
         ToggleMouseGrab();
     }
 
@@ -32,6 +44,26 @@ public class CameraController : MonoBehaviour
             ToggleMouseGrab(true);
         }
 #endif
+    }
+
+    private void LateUpdate()
+    {
+        var ray = m_camera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0.0f));
+
+        if (Physics.Raycast(ray, out var hit))
+        {
+            m_targetIndicator.SetActive(true);
+            m_targetIndicator.transform.position = hit.point;
+
+            if (Input.GetButtonDown("Fire1"))
+            {
+                SetDestination(hit.point);
+            }
+        }
+        else
+        {
+            m_targetIndicator.SetActive(false);
+        }
     }
 
     private void MoveCamera()
@@ -64,6 +96,16 @@ public class CameraController : MonoBehaviour
         var ry = localRotation.x - Input.GetAxis("Mouse Y") * sensitivity;
 
         transform.localEulerAngles = new Vector3(ry, rx, 0.0f);
+    }
+
+    private void SetDestination(Vector3 dest)
+    {
+        foreach (var ant in AntController.s_instances)
+        {
+            StartCoroutine(ant.SetDestination(dest));
+        }
+
+        m_destinationIndicator.transform.position = dest;
     }
 
     private void ToggleMouseGrab(bool? forcedValue = null)
