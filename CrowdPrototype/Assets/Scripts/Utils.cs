@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class Utils
+public static class Utils
 {
     public static Vector2 RandomPointInCircle(float radius)
     {
