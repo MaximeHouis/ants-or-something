@@ -12,6 +12,7 @@ public class CameraController : MonoBehaviour
     public Mode m_mode = Mode.Free;
     public Vector3 m_centerAnchor = Vector3.zero;
     public GameObject m_targetIndicator;
+    public GameObject m_objectiveIndicator;
 
     [Space(5)]
     [Min(0)] public float m_sensitivity = 1.0f;
@@ -22,7 +23,6 @@ public class CameraController : MonoBehaviour
     [Tooltip("0 == Unlimited")] [Delayed] [Min(0)]
     public int m_fpsLimit = 0;
 
-    private GameObject m_destinationIndicator;
     private Camera m_camera;
     private bool m_mouseGrabbed;
     private float m_rotationX;
@@ -70,8 +70,7 @@ public class CameraController : MonoBehaviour
         m_targetIndicator = Instantiate(m_targetIndicator, Vector3.zero, Quaternion.identity);
         m_targetIndicator.name = "Target";
 
-        m_destinationIndicator = Instantiate(m_targetIndicator, Vector3.zero, Quaternion.identity);
-        m_destinationIndicator.name = "Destination";
+        m_objectiveIndicator = Instantiate(m_objectiveIndicator, Vector3.zero, Quaternion.identity);
 
         if (m_mode == Mode.Free)
             MouseGrabbed = true;
@@ -205,7 +204,7 @@ public class CameraController : MonoBehaviour
             StartCoroutine(ant.SetDestination(dest));
         }
 
-        m_destinationIndicator.transform.position = dest;
+        m_objectiveIndicator.transform.position = dest;
     }
 
     private void OnDrawGizmosSelected()
@@ -219,7 +218,7 @@ public class CameraController : MonoBehaviour
         transform.LookAt(m_centerAnchor);
     }
 
-    private void SetFPS(int value)
+    private static void SetFPS(int value)
     {
         if (value == 0)
             value = -1;

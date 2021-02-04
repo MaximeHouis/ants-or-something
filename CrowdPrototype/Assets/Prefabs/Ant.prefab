@@ -9,12 +9,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4233029850129721322}
-  - component: {fileID: 219586971176174971}
   - component: {fileID: 7616591126017844456}
   - component: {fileID: 4705697964756527425}
   - component: {fileID: 9053018679039727932}
   - component: {fileID: 1279583126013266965}
-  m_Layer: 0
+  - component: {fileID: 219586971176174971}
+  m_Layer: 2
   m_Name: Ant
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -36,20 +36,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &219586971176174971
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1811624112967672224}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a1b452a03cb6604a97ac0927dc07e66, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Minimum: 0.2
-  m_Maximum: 0.5
 --- !u!65 &7616591126017844456
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -93,7 +79,7 @@ NavMeshAgent:
   m_Acceleration: 15
   avoidancePriority: 99
   m_AngularSpeed: 180
-  m_StoppingDistance: 1
+  m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -114,6 +100,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_agent: {fileID: 0}
+--- !u!114 &219586971176174971
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1811624112967672224}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a1b452a03cb6604a97ac0927dc07e66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Minimum: 0.2
+  m_Maximum: 0.5
 --- !u!1 &5039373829658262659
 GameObject:
   m_ObjectHideFlags: 0
@@ -125,7 +125,7 @@ GameObject:
   - component: {fileID: 2577788892464401985}
   - component: {fileID: 4001076323029243360}
   - component: {fileID: 800575333955849186}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}

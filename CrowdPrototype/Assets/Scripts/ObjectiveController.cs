@@ -7,11 +7,8 @@ public class ObjectiveController : MonoBehaviour
         var antController = other.gameObject.GetComponent<AntController>();
 
         if (!antController)
-        {
-            Debug.Log("GameObject " + gameObject.name + " ignored");
             return;
-        }
 
-        Destroy(other.gameObject);
+        antController.m_agent.ResetPath();
     }
 }

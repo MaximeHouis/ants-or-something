@@ -25,21 +25,6 @@ public class AntController : MonoBehaviour
         s_instances.Remove(this);
     }
 
-    private void LateUpdate()
-    {
-        if (!m_agent.isOnNavMesh)
-            return;
-
-        if (!m_destination.HasValue)
-            return;
-
-        if (Vector3.Distance(transform.position, (Vector3) m_destination) <= m_agent.stoppingDistance)
-        {
-            m_agent.ResetPath();
-            m_destination = null;
-        }
-    }
-
     private void OnCollisionEnter(Collision _)
     {
         if (m_touchedGround)
