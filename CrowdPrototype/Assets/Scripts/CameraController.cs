@@ -24,6 +24,8 @@ public class CameraController : MonoBehaviour
     public int m_fpsLimit = 0;
 
     private Camera m_camera;
+    private Rigidbody m_rigidbody;
+
     private bool m_mouseGrabbed;
     private float m_rotationX;
 
@@ -63,8 +65,9 @@ public class CameraController : MonoBehaviour
         m_camera = Camera.main;
 
         if (!m_camera)
-            throw new NullReferenceException("No main camera");
+            throw new NullReferenceException("No main camera assigned");
 
+        m_rigidbody = GetComponent<Rigidbody>();
         m_rotationX = -m_camera.transform.localEulerAngles.x;
 
         m_targetIndicator = Instantiate(m_targetIndicator, Vector3.zero, Quaternion.identity);
