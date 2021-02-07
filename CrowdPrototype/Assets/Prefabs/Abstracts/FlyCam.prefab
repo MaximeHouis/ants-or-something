@@ -102,6 +102,7 @@ MonoBehaviour:
     type: 3}
   m_objectiveIndicator: {fileID: 3114698447213512203, guid: d0ba7c8256476764ea29fbfce04a40af,
     type: 3}
+  m_enableControls: 1
   m_sensitivity: 1
   m_speed: 20
   m_rotationLockX: 89.9

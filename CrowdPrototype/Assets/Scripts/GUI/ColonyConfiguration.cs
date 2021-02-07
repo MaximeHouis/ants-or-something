@@ -21,11 +21,11 @@ public class ColonyConfiguration : MonoBehaviour
             return;
         }
 
-        var input = m_antCountModel.GetComponentInChildren<Slider>();
+        var slider = m_antCountModel.GetComponentInChildren<Slider>();
         var classNameText = m_antCountModel.GetComponentInChildren<Text>();
         var rectTransform = m_antCountModel.GetComponentInChildren<RectTransform>();
 
-        if (!input || !classNameText || !rectTransform)
+        if (!slider || !classNameText || !rectTransform)
         {
             Debug.LogError("Missing required components in children: Slider and/or Text");
             return;
@@ -36,6 +36,9 @@ public class ColonyConfiguration : MonoBehaviour
         {
             var obj = Instantiate(m_antCountModel, m_inputsRoot.transform);
             obj.name = "Input Ant Class: " + antClass;
+
+            slider = obj.GetComponentInChildren<Slider>();
+            slider.onValueChanged.AddListener(OnValueChanged);
 
             classNameText = obj.GetComponentInChildren<Text>();
             classNameText.text = antClass.ToString().ToLower();
@@ -50,5 +53,10 @@ public class ColonyConfiguration : MonoBehaviour
         }
 
         Destroy(m_antCountModel);
+    }
+
+    private static void OnValueChanged(float value)
+    {
+        // TODO: Update all of them
     }
 }

@@ -9,19 +9,22 @@ public class CameraController : MonoBehaviour
         Orbit
     }
 
+    [Header("General config")]
     public Mode m_mode = Mode.Free;
+
     public Vector3 m_centerAnchor = Vector3.zero;
     public GameObject m_targetIndicator;
     public GameObject m_objectiveIndicator;
 
-    [Space(5)]
-    [Min(0)] public float m_sensitivity = 1.0f;
+    [Header("Controls")]
+    public bool m_enableControls = true;
 
+    [Min(0)] public float m_sensitivity = 1.0f;
     [Min(0)] public float m_speed = 100.0f;
     [Range(0, 89.9f)] public float m_rotationLockX = 89.9f;
 
-    [Tooltip("0 == Unlimited")] [Delayed] [Min(0)]
-    public int m_fpsLimit = 0;
+    [Header("Other")] [Tooltip("0 == Unlimited")]
+    [Delayed] [Min(0)] public int m_fpsLimit = 0;
 
     private Camera m_camera;
     private Rigidbody m_rigidbody;
@@ -88,6 +91,9 @@ public class CameraController : MonoBehaviour
 
     private void Update()
     {
+        if (!m_enableControls)
+            return;
+
         MoveCamera();
         RotateCamera();
 

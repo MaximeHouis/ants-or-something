@@ -8234,6 +8234,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FlyCam
       objectReference: {fileID: 0}
+    - target: {fileID: 5240640208783669974, guid: de21953cded702445811ef7a8bc18082,
+        type: 3}
+      propertyPath: m_enableControls
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5240640208783669975, guid: de21953cded702445811ef7a8bc18082,
         type: 3}
       propertyPath: m_RootOrder
