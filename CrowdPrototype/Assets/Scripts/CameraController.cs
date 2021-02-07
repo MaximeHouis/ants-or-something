@@ -75,8 +75,8 @@ public class CameraController : MonoBehaviour
 
         m_objectiveIndicator = Instantiate(m_objectiveIndicator, Vector3.zero, Quaternion.identity);
 
-        if (m_mode == Mode.Free)
-            MouseGrabbed = true;
+        // if (m_mode == Mode.Free)
+        //     MouseGrabbed = true;
 
         SetFPS(m_fpsLimit);
     }
@@ -98,12 +98,10 @@ public class CameraController : MonoBehaviour
                 MouseGrabbed = !MouseGrabbed;
             }
 
-#if UNITY_EDITOR
             if (!MouseGrabbed && Input.GetMouseButtonDown(0))
             {
                 MouseGrabbed = true;
             }
-#endif
         }
     }
 

@@ -6,9 +6,18 @@ using UnityEngine.AI;
 [RequireComponent(typeof(NavMeshAgent))]
 public class AntController : MonoBehaviour
 {
+    public enum AntClass
+    {
+        Worker,
+        Soldier,
+        Breeder,
+        Scout
+    }
+
     public static readonly List<AntController> s_instances = new List<AntController>();
 
     [HideInInspector] public NavMeshAgent m_agent;
+    [HideInInspector] public AntClass m_antClass;
 
     private bool m_touchedGround = false;
     private Vector3? m_destination = null;
