@@ -17,9 +17,8 @@ public class CameraController : MonoBehaviour
     public GameObject m_objectiveIndicator;
 
     [Header("Controls")]
-    public bool m_enableControls = true;
-
     [Min(0)] public float m_sensitivity = 1.0f;
+
     [Min(0)] public float m_speed = 100.0f;
     [Range(0, 89.9f)] public float m_rotationLockX = 89.9f;
 
@@ -91,9 +90,6 @@ public class CameraController : MonoBehaviour
 
     private void Update()
     {
-        if (!m_enableControls)
-            return;
-
         MoveCamera();
         RotateCamera();
 
@@ -216,7 +212,13 @@ public class CameraController : MonoBehaviour
 
     private void OnDrawGizmosSelected()
     {
-        Gizmos.DrawLine(transform.position, m_centerAnchor);
+        var position = transform.position;
+        
+        Gizmos.color = Color.grey;
+        Gizmos.DrawLine(position, m_centerAnchor);
+
+        Gizmos.color = Color.red;
+        Gizmos.DrawLine(position, m_targetIndicator.transform.position);
     }
 
     [ContextMenu("Look At Anchor")]

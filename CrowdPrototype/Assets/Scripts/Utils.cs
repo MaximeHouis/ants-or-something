@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
+using Random = UnityEngine.Random;
 
 public static class Utils
 {
@@ -24,5 +26,20 @@ public static class Utils
     public static Vector3 RandomPointInBox(BoxCollider boxCollider)
     {
         return RandomPointInBox(boxCollider.transform.position + boxCollider.center, boxCollider.size);
+    }
+
+    public static Color ColorRGB255(float r, float g, float b, float a = 255)
+    {
+        return new Color(r / 255.0f, g / 255.0f, b / 255.0f, a / 255.0f);
+    }
+
+    public static Color ColorFromInt(uint rgba)
+    {
+        float a = rgba & 0xFF;
+        float b = (rgba >> 8) & 0xFF;
+        float g = (rgba >> 16) & 0xFF;
+        float r = (rgba >> 24) & 0xFF;
+
+        return ColorRGB255(r, g, b, a);
     }
 }

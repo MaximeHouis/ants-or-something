@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 public class ColonyConfiguration : MonoBehaviour
 {
@@ -9,13 +11,19 @@ public class ColonyConfiguration : MonoBehaviour
     public GameObject m_inputsRoot;
 
     public GameObject m_antCountModel;
+    public Text m_antCountText;
+    
+    [Header("Ant Class Inputs")]
     public Vector2 m_offset = new Vector2(0, 0);
 
-    private Dictionary<string, GameObject> m_inputs = new Dictionary<string, GameObject>();
+    [Header("Component Toggles")] [Tooltip("Components to enable once 'OK' is pressed")]
+    public List<MonoBehaviour> m_components;
+
+    private readonly Dictionary<string, GameObject> m_inputs = new Dictionary<string, GameObject>();
 
     private void Start()
     {
-        if (!m_inputsRoot || !m_antCountModel)
+        if (!m_inputsRoot || !m_antCountModel || !m_antCountText)
         {
             Debug.LogError("Invalid component configuration");
             return;
@@ -32,13 +40,15 @@ public class ColonyConfiguration : MonoBehaviour
         }
 
         var offset = Vector2.zero;
-        foreach (var antClass in Enum.GetValues(typeof(AntController.AntClass)))
+        foreach (var antClass in Enum.GetValues(typeof(AntClass)).Cast<AntClass>())
         {
             var obj = Instantiate(m_antCountModel, m_inputsRoot.transform);
             obj.name = "Input Ant Class: " + antClass;
 
             slider = obj.GetComponentInChildren<Slider>();
+            slider.value = Random.value;
             slider.onValueChanged.AddListener(OnValueChanged);
+            SetBackground(slider, antClass);
 
             classNameText = obj.GetComponentInChildren<Text>();
             classNameText.text = antClass.ToString().ToLower();
@@ -53,10 +63,35 @@ public class ColonyConfiguration : MonoBehaviour
         }
 
         Destroy(m_antCountModel);
+        OnValueChanged();
     }
 
-    private static void OnValueChanged(float value)
+    public void ButtonOK()
     {
-        // TODO: Update all of them
+        foreach (var component in m_components)
+        {
+            component.enabled = true;
+        }
+        
+        gameObject.SetActive(false);
+    }
+
+    private void OnValueChanged(float _ = 0)
+    {
+        foreach (var input in m_inputs)
+        {
+            var obj = input.Value;
+            var text = obj.GetComponentInChildren<Text>();
+            var slider = obj.GetComponentInChildren<Slider>();
+
+            text.text = $"{Mathf.RoundToInt(slider.value * 100.0f),3:d}% - {input.Key}";
+        }
+    }
+
+    private static void SetBackground(Slider slider, AntClass antClass)
+    {
+        var bg = slider.fillRect.GetComponent<Image>();
+
+        bg.color = antClass.Color();
     }
 }
