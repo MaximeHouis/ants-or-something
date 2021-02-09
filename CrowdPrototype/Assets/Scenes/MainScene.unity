@@ -310,9 +310,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6686433534786079795, guid: c154cb2d97d14384baaeafd9e4184129,
         type: 3}
-      propertyPath: m_components.Array.size
-      value: 2
-      objectReference: {fileID: 0}
+      propertyPath: m_spawner
+      value: 
+      objectReference: {fileID: 820814389}
     - target: {fileID: 6686433534786079795, guid: c154cb2d97d14384baaeafd9e4184129,
         type: 3}
       propertyPath: m_components.Array.data[0]
@@ -8267,7 +8267,7 @@ PrefabInstance:
     - target: {fileID: 4983790288630961103, guid: 2a68fd57b604a6c4bbbd349a4a35659e,
         type: 3}
       propertyPath: m_count
-      value: 150
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 4983790288630961103, guid: 2a68fd57b604a6c4bbbd349a4a35659e,
         type: 3}

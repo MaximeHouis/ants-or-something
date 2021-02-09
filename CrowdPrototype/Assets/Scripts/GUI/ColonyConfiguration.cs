@@ -12,7 +12,8 @@ public class ColonyConfiguration : MonoBehaviour
 
     public GameObject m_antCountModel;
     public Text m_antCountText;
-    
+    public Spawner m_spawner;
+
     [Header("Ant Class Inputs")]
     public Vector2 m_offset = new Vector2(0, 0);
 
@@ -20,6 +21,16 @@ public class ColonyConfiguration : MonoBehaviour
     public List<MonoBehaviour> m_components;
 
     private readonly Dictionary<string, GameObject> m_inputs = new Dictionary<string, GameObject>();
+
+    public void ButtonOK()
+    {
+        foreach (var component in m_components)
+        {
+            component.enabled = true;
+        }
+
+        gameObject.SetActive(false);
+    }
 
     private void Start()
     {
@@ -29,6 +40,12 @@ public class ColonyConfiguration : MonoBehaviour
             return;
         }
 
+        InitInputs();
+        UpdateAntCount();
+    }
+
+    private void InitInputs()
+    {
         var slider = m_antCountModel.GetComponentInChildren<Slider>();
         var classNameText = m_antCountModel.GetComponentInChildren<Text>();
         var rectTransform = m_antCountModel.GetComponentInChildren<RectTransform>();
@@ -66,25 +83,28 @@ public class ColonyConfiguration : MonoBehaviour
         OnValueChanged();
     }
 
-    public void ButtonOK()
+    private void UpdateAntCount()
     {
-        foreach (var component in m_components)
-        {
-            component.enabled = true;
-        }
-        
-        gameObject.SetActive(false);
+        m_antCountText.text = string.Format(m_antCountText.text, m_spawner.m_count);
     }
 
     private void OnValueChanged(float _ = 0)
     {
+        var weight = (from input in m_inputs
+            select input.Value
+            into obj
+            select obj.GetComponentInChildren<Slider>()
+            into slider
+            select slider.value).Sum();
+
         foreach (var input in m_inputs)
         {
             var obj = input.Value;
             var text = obj.GetComponentInChildren<Text>();
             var slider = obj.GetComponentInChildren<Slider>();
 
-            text.text = $"{Mathf.RoundToInt(slider.value * 100.0f),3:d}% - {input.Key}";
+            text.text = $"{Mathf.RoundToInt(slider.value * 100.0f),3:d}% - {input.Key,-10} " +
+                        $"({Mathf.FloorToInt(slider.value / weight * m_spawner.m_count)})";
         }
     }
 

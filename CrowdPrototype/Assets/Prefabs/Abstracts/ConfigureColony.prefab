@@ -35,7 +35,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 170.95, y: 0}
-  m_SizeDelta: {x: 160, y: 20}
+  m_SizeDelta: {x: 300, y: 20}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &5634106364461157761
 CanvasRenderer:
@@ -257,7 +257,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Total Ant Count: <color=''yellow''>{}</color>'
+  m_Text: 'Total Ant Count: <color=''yellow''>{0}</color>'
 --- !u!1 &2249870009812938047
 GameObject:
   m_ObjectHideFlags: 0
@@ -1214,8 +1214,11 @@ MonoBehaviour:
   m_inputsRoot: {fileID: 2817798591546468043}
   m_antCountModel: {fileID: 331734711678495260}
   m_antCountText: {fileID: 6171199293598413235}
+  m_spawner: {fileID: 0}
   m_offset: {x: 0, y: -42}
-  m_components: []
+  m_components:
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!1 &7562771662566972967
 GameObject:
   m_ObjectHideFlags: 0
