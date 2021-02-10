@@ -7,7 +7,7 @@ public class Spawner : MonoBehaviour
     [Header("Core Spawner")]
     public GameObject m_entity;
 
-    [Min(0)] public int m_count = 25;
+    public uint m_count = 25;
 
     [Min(0), InspectorName("Duration in seconds")]
     public float m_duration = 2.0f;
@@ -45,13 +45,13 @@ public class Spawner : MonoBehaviour
 
     private IEnumerator DoSpawn()
     {
-        for (var i = 0; i < m_count; i++)
+        for (var i = 0u; i < m_count; i++)
         {
             var pos = Utils.RandomPointInBox(m_collider);
             var entity = Instantiate(m_entity, pos, Quaternion.identity, transform);
 
             entity.name = "Ant #" + (i + 1);
-            // TODO: Assign class
+            entity.GetComponent<AntController>().AssignClass(m_colonyConfig.Ratios, i, m_count);
 
             if (Interval != 0)
                 yield return new WaitForSeconds(Interval);

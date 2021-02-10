@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
@@ -13,15 +14,21 @@ public class ColonyConfiguration : MonoBehaviour
 
     public GameObject m_antCountModel;
     public Text m_antCountText;
+    public Button m_okButton;
+
+    [Header("Entity Spawn")]
     public Spawner m_spawner;
 
     [Header("Ant Class Inputs")]
     public Vector2 m_offset = new Vector2(0, 0);
 
-    [Header(" OK button pressed")]
+    [Header("OK button pressed")]
     public UnityEvent m_callbacks;
 
     private readonly Dictionary<string, GameObject> m_inputs = new Dictionary<string, GameObject>();
+    private string m_originalCountFormat;
+
+    public Dictionary<AntClass, float> Ratios { get; } = new Dictionary<AntClass, float>();
 
     public void ButtonOK()
     {
@@ -36,6 +43,8 @@ public class ColonyConfiguration : MonoBehaviour
             Debug.LogError("Invalid component configuration");
             return;
         }
+
+        m_originalCountFormat = m_antCountText.text;
 
         InitInputs();
         UpdateAntCount();
@@ -82,26 +91,45 @@ public class ColonyConfiguration : MonoBehaviour
 
     private void UpdateAntCount()
     {
-        m_antCountText.text = string.Format(m_antCountText.text, m_spawner.m_count);
+        m_antCountText.text = string.Format(m_originalCountFormat, m_spawner.m_count);
     }
 
     private void OnValueChanged(float _ = 0)
     {
-        var weight = (from input in m_inputs
-            select input.Value
-            into obj
-            select obj.GetComponentInChildren<Slider>()
-            into slider
-            select slider.value).Sum();
+        float weight = 0;
+        float offset = 0;
+
+        foreach (var input in m_inputs)
+        {
+            var obj = input.Value;
+            var slider = obj.GetComponentInChildren<Slider>();
+
+            weight += slider.value;
+        }
+
+        m_okButton.interactable = weight != 0;
+        Ratios.Clear();
 
         foreach (var input in m_inputs)
         {
             var obj = input.Value;
             var text = obj.GetComponentInChildren<Text>();
             var slider = obj.GetComponentInChildren<Slider>();
+            var count = weight != 0 ? Mathf.RoundToInt(slider.value / weight * m_spawner.m_count) : 0;
+
+            if (weight != 0)
+            {
+                if (!Enum.TryParse(input.Key, out AntClass antClass))
+                    throw new InvalidEnumArgumentException("Ant class error");
+
+                var ratio = slider.value / weight;
+
+                Ratios.Add(antClass, offset + ratio);
+                offset += ratio;
+            }
 
             text.text = $"{Mathf.RoundToInt(slider.value * 100.0f),3:d}% - {input.Key,-10} " +
-                        $"({Mathf.FloorToInt(slider.value / weight * m_spawner.m_count)})";
+                        $"(~{count})";
         }
     }
 

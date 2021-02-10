@@ -42,6 +42,9 @@ public class CameraController : MonoBehaviour
 
             m_mouseGrabbed = value;
 
+            if (m_mode != Mode.Free)
+                return;
+
             Cursor.visible = !m_mouseGrabbed;
             Cursor.lockState = m_mouseGrabbed ? CursorLockMode.Locked : CursorLockMode.None;
         }
@@ -207,6 +210,7 @@ public class CameraController : MonoBehaviour
     public void SetControlsEnabled(bool value)
     {
         m_enabled = value;
+        MouseGrabbed = true;
     }
 
     private void SetDestination(Vector3 dest)

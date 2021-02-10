@@ -163,6 +163,11 @@ PrefabInstance:
       propertyPath: m_AnchorMin.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4480734760625366373, guid: c154cb2d97d14384baaeafd9e4184129,
+        type: 3}
+      propertyPath: m_Interactable
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4638454490694245705, guid: c154cb2d97d14384baaeafd9e4184129,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -310,9 +315,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6686433534786079795, guid: c154cb2d97d14384baaeafd9e4184129,
         type: 3}
+      propertyPath: m_btnOK
+      value: 
+      objectReference: {fileID: 1478656191}
+    - target: {fileID: 6686433534786079795, guid: c154cb2d97d14384baaeafd9e4184129,
+        type: 3}
       propertyPath: m_spawner
       value: 
       objectReference: {fileID: 820814389}
+    - target: {fileID: 6686433534786079795, guid: c154cb2d97d14384baaeafd9e4184129,
+        type: 3}
+      propertyPath: m_okButton
+      value: 
+      objectReference: {fileID: 1478656191}
     - target: {fileID: 6686433534786079795, guid: c154cb2d97d14384baaeafd9e4184129,
         type: 3}
       propertyPath: m_components.Array.size
@@ -1525,7 +1540,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh14198
+  m_Name: pb_Mesh14200
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -3475,7 +3490,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh14184
+  m_Name: pb_Mesh14186
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -4204,7 +4219,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh14366
+  m_Name: pb_Mesh14368
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -5378,7 +5393,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh14216
+  m_Name: pb_Mesh14218
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -6988,6 +7003,18 @@ Transform:
   m_Father: {fileID: 1462458420}
   m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1478656191 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4480734760625366373, guid: c154cb2d97d14384baaeafd9e4184129,
+    type: 3}
+  m_PrefabInstance: {fileID: 57382517}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1816745709
 GameObject:
   m_ObjectHideFlags: 0
@@ -8289,7 +8316,7 @@ PrefabInstance:
     - target: {fileID: 4983790288630961100, guid: 2a68fd57b604a6c4bbbd349a4a35659e,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.33333334
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 4983790288630961100, guid: 2a68fd57b604a6c4bbbd349a4a35659e,
         type: 3}

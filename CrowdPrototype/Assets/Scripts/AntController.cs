@@ -1,5 +1,7 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -45,6 +47,21 @@ public class AntController : MonoBehaviour
             return;
 
         m_touchedGround = true;
+    }
+
+    public void AssignClass(Dictionary<AntClass, float> ratios, uint index, uint count)
+    {
+        // ex: 0.2907795, 0.4834647, 0.8584071, 1
+
+        var range = index / (double) count;
+
+        foreach (var ratio in ratios.Where(ratio => range < ratio.Value))
+        {
+            Class = ratio.Key;
+            return;
+        }
+
+        throw new IndexOutOfRangeException("Ratio error");
     }
 
     public IEnumerator SetDestination(Vector3 dest)
