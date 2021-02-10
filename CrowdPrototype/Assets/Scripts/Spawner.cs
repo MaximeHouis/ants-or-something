@@ -4,13 +4,16 @@ using UnityEngine;
 [RequireComponent(typeof(BoxCollider))]
 public class Spawner : MonoBehaviour
 {
+    [Header("Core Spawner")]
     public GameObject m_entity;
 
-    [Min(0)]
-    public int m_count = 25;
+    [Min(0)] public int m_count = 25;
 
     [Min(0), InspectorName("Duration in seconds")]
     public float m_duration = 2.0f;
+
+    [Header("Ant Colony")]
+    public ColonyConfiguration m_colonyConfig;
 
     private float Interval => m_count != 0 ? m_duration / m_count : 0f;
     private BoxCollider m_collider;
@@ -18,8 +21,6 @@ public class Spawner : MonoBehaviour
     private void Start()
     {
         m_collider = GetComponent<BoxCollider>();
-
-        Spawn();
     }
 
     private void OnValidate()
@@ -39,7 +40,7 @@ public class Spawner : MonoBehaviour
         if (Application.isPlaying)
             StartCoroutine(DoSpawn());
         else
-            Debug.LogError("Cannot spawn entities as the game is not running.");
+            Debug.LogError("Cannot spawn entities because the game is not running.");
     }
 
     private IEnumerator DoSpawn()
@@ -50,6 +51,7 @@ public class Spawner : MonoBehaviour
             var entity = Instantiate(m_entity, pos, Quaternion.identity, transform);
 
             entity.name = "Ant #" + (i + 1);
+            // TODO: Assign class
 
             if (Interval != 0)
                 yield return new WaitForSeconds(Interval);

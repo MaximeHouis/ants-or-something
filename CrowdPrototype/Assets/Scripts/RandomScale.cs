@@ -16,7 +16,7 @@ public class RandomScale : MonoBehaviour
     [Header("Debug")]
     public bool m_showGizmos;
 
-    private void OnDrawGizmosSelected()
+    private void OnDrawGizmos()
     {
         if (!m_showGizmos)
             return;

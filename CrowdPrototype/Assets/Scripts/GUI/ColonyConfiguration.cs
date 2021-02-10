@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
@@ -17,18 +18,14 @@ public class ColonyConfiguration : MonoBehaviour
     [Header("Ant Class Inputs")]
     public Vector2 m_offset = new Vector2(0, 0);
 
-    [Header("Component Toggles")] [Tooltip("Components to enable once 'OK' is pressed")]
-    public List<MonoBehaviour> m_components;
+    [Header(" OK button pressed")]
+    public UnityEvent m_callbacks;
 
     private readonly Dictionary<string, GameObject> m_inputs = new Dictionary<string, GameObject>();
 
     public void ButtonOK()
     {
-        foreach (var component in m_components)
-        {
-            component.enabled = true;
-        }
-
+        m_callbacks.Invoke();
         gameObject.SetActive(false);
     }
 

@@ -17,8 +17,9 @@ public class CameraController : MonoBehaviour
     public GameObject m_objectiveIndicator;
 
     [Header("Controls")]
-    [Min(0)] public float m_sensitivity = 1.0f;
+    public bool m_enabled = true;
 
+    [Min(0)] public float m_sensitivity = 1.0f;
     [Min(0)] public float m_speed = 100.0f;
     [Range(0, 89.9f)] public float m_rotationLockX = 89.9f;
 
@@ -90,8 +91,8 @@ public class CameraController : MonoBehaviour
 
     private void Update()
     {
-        MoveCamera();
-        RotateCamera();
+        if (!m_enabled)
+            return;
 
         if (m_mode == Mode.Free)
         {
@@ -105,6 +106,9 @@ public class CameraController : MonoBehaviour
                 MouseGrabbed = true;
             }
         }
+
+        MoveCamera();
+        RotateCamera();
     }
 
     private void LateUpdate()
@@ -200,6 +204,11 @@ public class CameraController : MonoBehaviour
             transform.LookAt(m_centerAnchor);
     }
 
+    public void SetControlsEnabled(bool value)
+    {
+        m_enabled = value;
+    }
+
     private void SetDestination(Vector3 dest)
     {
         foreach (var ant in AntController.s_instances)
@@ -213,7 +222,7 @@ public class CameraController : MonoBehaviour
     private void OnDrawGizmosSelected()
     {
         var position = transform.position;
-        
+
         Gizmos.color = Color.grey;
         Gizmos.DrawLine(position, m_centerAnchor);
 

@@ -9,10 +9,23 @@ public class AntController : MonoBehaviour
     public static readonly List<AntController> s_instances = new List<AntController>();
 
     [HideInInspector] public NavMeshAgent m_agent;
-    [HideInInspector] public AntClass m_antClass;
 
     private bool m_touchedGround = false;
     private Vector3? m_destination = null;
+    private AntClass m_class;
+
+    public AntClass Class
+    {
+        get => m_class;
+        set
+        {
+            m_class = value;
+
+            var color = value.Color();
+            GetComponent<MeshRenderer>().materials[0].color = color;
+            GetComponent<MeshRenderer>().materials[1].color += color;
+        }
+    }
 
     private void Start()
     {
