@@ -3,16 +3,9 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    public enum Mode
-    {
-        Free,
-        Orbit
-    }
-
     [Header("General config")]
-    public Mode m_mode = Mode.Free;
-
     public Vector3 m_centerAnchor = Vector3.zero;
+
     public GameObject m_targetIndicator;
     public GameObject m_objectiveIndicator;
 
@@ -42,27 +35,8 @@ public class CameraController : MonoBehaviour
 
             m_mouseGrabbed = value;
 
-            if (m_mode != Mode.Free)
-                return;
-
             Cursor.visible = !m_mouseGrabbed;
             Cursor.lockState = m_mouseGrabbed ? CursorLockMode.Locked : CursorLockMode.None;
-        }
-    }
-
-    private bool CanRaycast
-    {
-        get
-        {
-            switch (m_mode)
-            {
-                case Mode.Free:
-                    return m_mouseGrabbed;
-                case Mode.Orbit:
-                    return !m_mouseGrabbed;
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
         }
     }
 
@@ -81,9 +55,6 @@ public class CameraController : MonoBehaviour
 
         m_objectiveIndicator = Instantiate(m_objectiveIndicator, Vector3.zero, Quaternion.identity);
 
-        // if (m_mode == Mode.Free)
-        //     MouseGrabbed = true;
-
         SetFPS(m_fpsLimit);
     }
 
@@ -97,17 +68,21 @@ public class CameraController : MonoBehaviour
         if (!m_enabled)
             return;
 
-        if (m_mode == Mode.Free)
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (Input.GetKeyDown(KeyCode.Escape))
-            {
-                MouseGrabbed = !MouseGrabbed;
-            }
+            MouseGrabbed = !MouseGrabbed;
+        }
 
-            if (!MouseGrabbed && Input.GetMouseButtonDown(0))
-            {
-                MouseGrabbed = true;
-            }
+        if (!MouseGrabbed && Input.GetMouseButtonDown(0))
+        {
+            MouseGrabbed = true;
+        }
+        else if (Input.GetButtonDown("Fire1"))
+        {
+            var ray = m_camera.ScreenPointToRay(Input.mousePosition);
+
+            if (Physics.Raycast(ray, out var hit))
+                SetDestination(hit.point);
         }
 
         MoveCamera();
@@ -118,15 +93,10 @@ public class CameraController : MonoBehaviour
     {
         var ray = m_camera.ScreenPointToRay(Input.mousePosition);
 
-        if (CanRaycast && Physics.Raycast(ray, out var hit))
+        if (MouseGrabbed && Physics.Raycast(ray, out var hit))
         {
             m_targetIndicator.SetActive(true);
             m_targetIndicator.transform.position = hit.point;
-
-            if (Input.GetButtonDown("Fire1"))
-            {
-                SetDestination(hit.point);
-            }
         }
         else
         {
@@ -141,22 +111,16 @@ public class CameraController : MonoBehaviour
         var dx = Input.GetAxis("Horizontal") * speed;
         var dy = Input.GetAxis("Vertical") * speed;
         var dh = Input.GetAxis("Height") * speed;
-        var moved = false;
 
         if (dx != 0 || dy != 0)
         {
             transform.Translate(new Vector3(dx, 0, dy), Space.Self);
-            moved = true;
         }
 
         if (dh != 0)
         {
             transform.Translate(new Vector3(0, dh, 0), Space.World);
-            moved = true;
         }
-
-        if (m_mode == Mode.Orbit && moved)
-            transform.LookAt(m_centerAnchor);
     }
 
     private void RotateCamera()
@@ -165,21 +129,6 @@ public class CameraController : MonoBehaviour
         var rx = Input.GetAxis("Mouse X") * sensitivity;
         var ry = Input.GetAxis("Mouse Y") * sensitivity;
 
-        switch (m_mode)
-        {
-            case Mode.Free:
-                RotateCameraFree(rx, ry);
-                break;
-            case Mode.Orbit:
-                RotateCameraOrbit(rx, ry);
-                break;
-            default:
-                throw new ArgumentOutOfRangeException();
-        }
-    }
-
-    private void RotateCameraFree(float rx, float ry)
-    {
         if (!m_mouseGrabbed || (rx == 0 && ry == 0))
             return;
 
@@ -191,20 +140,6 @@ public class CameraController : MonoBehaviour
         m_rotationX = Mathf.Clamp(m_rotationX, -m_rotationLockX, m_rotationLockX);
 
         transform.localEulerAngles = new Vector3(-m_rotationX, y, 0);
-    }
-
-    private void RotateCameraOrbit(float rx, float ry)
-    {
-        MouseGrabbed = Input.GetButton("Fire2");
-
-        if (!m_mouseGrabbed)
-            return;
-
-        if (rx != 0)
-            transform.RotateAround(m_centerAnchor, Vector3.up, rx);
-
-        if (rx != 0 || ry != 0)
-            transform.LookAt(m_centerAnchor);
     }
 
     public void SetControlsEnabled(bool value)
