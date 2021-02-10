@@ -1,5 +1,5 @@
 ﻿using System;
-using Color = UnityEngine.Color;
+using UnityEngine;
 
 public enum AntClass
 {
