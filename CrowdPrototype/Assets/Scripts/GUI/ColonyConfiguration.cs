@@ -128,8 +128,10 @@ public class ColonyConfiguration : MonoBehaviour
                 offset += ratio;
             }
 
-            text.text = $"{Mathf.RoundToInt(slider.value * 100.0f),3:d}% - {input.Key,-10} " +
-                        $"(~{count})";
+            var plural = count != 1 ? "s" : "";
+            text.text = $"Weight: {Mathf.RoundToInt(slider.value * 100.0f),3} - " +
+                        $"{input.Key,-7} {Mathf.RoundToInt(weight != 0 ? slider.value / weight * 100f : 0),3}%  " +
+                        $"~{count,3} unit{plural}";
         }
     }
 
