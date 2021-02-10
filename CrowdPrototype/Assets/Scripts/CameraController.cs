@@ -18,6 +18,7 @@ public class CameraController : MonoBehaviour
     [Delayed] [Min(0)] public int m_fpsLimit = 0;
 
     private Camera m_camera;
+    private Vector3 m_originalPosition;
 
     private void Start()
     {
@@ -25,6 +26,8 @@ public class CameraController : MonoBehaviour
 
         if (!m_camera)
             throw new NullReferenceException("No main camera assigned");
+
+        m_originalPosition = transform.position;
 
         m_targetIndicator = Instantiate(m_targetIndicator, Vector3.zero, Quaternion.identity);
         m_targetIndicator.name = "Target";
@@ -51,6 +54,11 @@ public class CameraController : MonoBehaviour
 
             if (Physics.Raycast(ray, out var hit))
                 SetDestination(hit.point);
+        }
+
+        if (Input.GetButtonDown("Reset"))
+        {
+            transform.position = m_originalPosition;
         }
 
         MoveCamera();

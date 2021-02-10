@@ -770,17 +770,17 @@ PrefabInstance:
     - target: {fileID: 5893504220007094806, guid: c154cb2d97d14384baaeafd9e4184129,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 5893504220007094806, guid: c154cb2d97d14384baaeafd9e4184129,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5893504220007094806, guid: c154cb2d97d14384baaeafd9e4184129,
         type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 6177536667067114525, guid: c154cb2d97d14384baaeafd9e4184129,
         type: 3}
@@ -830,17 +830,22 @@ PrefabInstance:
     - target: {fileID: 7152221407582155955, guid: c154cb2d97d14384baaeafd9e4184129,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 7152221407582155955, guid: c154cb2d97d14384baaeafd9e4184129,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7394788834470238989, guid: c154cb2d97d14384baaeafd9e4184129,
         type: 3}
       propertyPath: m_Name
       value: ConfigureColony
+      objectReference: {fileID: 0}
+    - target: {fileID: 7394788834470238989, guid: c154cb2d97d14384baaeafd9e4184129,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7454714854960081950, guid: c154cb2d97d14384baaeafd9e4184129,
         type: 3}
@@ -1620,13 +1625,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 705507993}
-  m_LocalRotation: {x: 0.12031749, y: -0.82266706, z: 0.4582856, w: 0.31419265}
-  m_LocalPosition: {x: 0, y: 10, z: 0}
+  m_LocalRotation: {x: 0.75877684, y: -0.23156884, z: 0.4941781, w: 0.35555822}
+  m_LocalPosition: {x: 0, y: 11.09, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 56.062004, y: -133.24701, z: 9.279}
+  m_LocalEulerAnglesHint: {x: 129.785, y: -66.151, z: 0}
 --- !u!114 &820814389 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4983790288630961103, guid: 2a68fd57b604a6c4bbbd349a4a35659e,
