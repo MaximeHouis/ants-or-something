@@ -25,7 +25,7 @@ public class AntController : MonoBehaviour
 
             var color = value.Color();
             GetComponent<MeshRenderer>().materials[0].color = color;
-            GetComponent<MeshRenderer>().materials[1].color += color;
+            GetComponent<MeshRenderer>().materials[1].color = color * (2f / 3f);
         }
     }
 
