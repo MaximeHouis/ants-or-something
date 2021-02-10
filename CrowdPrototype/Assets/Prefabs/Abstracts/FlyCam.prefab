@@ -96,13 +96,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d86ac828a61eaa43a616386bcdfd595, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_mode: 0
   m_centerAnchor: {x: 0, y: 0, z: 0}
   m_targetIndicator: {fileID: 2623490878750638298, guid: dd2794a6762ef6243bc87cf72fedf005,
     type: 3}
   m_objectiveIndicator: {fileID: 3114698447213512203, guid: d0ba7c8256476764ea29fbfce04a40af,
     type: 3}
-  m_enableControls: 1
+  m_enabled: 0
   m_sensitivity: 1
   m_speed: 20
   m_rotationLockX: 89.9

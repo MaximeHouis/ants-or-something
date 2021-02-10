@@ -1345,12 +1345,34 @@ MonoBehaviour:
   m_inputsRoot: {fileID: 2817798591546468043}
   m_antCountModel: {fileID: 331734711678495260}
   m_antCountText: {fileID: 6171199293598413235}
-  m_okButton: {fileID: 0}
+  m_okButton: {fileID: 4480734760625366373}
   m_spawner: {fileID: 0}
   m_offset: {x: 0, y: -42}
   m_callbacks:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_MethodName: SetControlsEnabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_MethodName: Spawn
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!1 &7562771662566972967
 GameObject:
   m_ObjectHideFlags: 0
