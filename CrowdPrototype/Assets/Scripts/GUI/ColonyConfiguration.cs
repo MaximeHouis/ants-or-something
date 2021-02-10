@@ -36,6 +36,14 @@ public class ColonyConfiguration : MonoBehaviour
         gameObject.SetActive(false);
     }
 
+    public void ButtonRandomizeInputs()
+    {
+        foreach (var slider in m_inputs.Select(input => input.Value.GetComponentInChildren<Slider>()))
+        {
+            slider.value = Random.value;
+        }
+    }
+
     private void Start()
     {
         if (!m_inputsRoot || !m_antCountModel || !m_antCountText)
