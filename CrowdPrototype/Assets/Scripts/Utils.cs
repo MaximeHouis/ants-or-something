@@ -2,6 +2,14 @@
 
 public static class Utils
 {
+    public static void Swap<T>(ref T a, ref T b)
+    {
+        var tmp = a;
+
+        a = b;
+        b = tmp;
+    }
+
     public static Vector2 RandomPointInCircle(float radius)
     {
         var angle = Random.value * 2.0f * Mathf.PI;
