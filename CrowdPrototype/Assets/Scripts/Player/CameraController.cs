@@ -29,11 +29,11 @@ public class CameraController : MonoBehaviour
 
         m_originalPosition = transform.position;
 
-        m_targetIndicator = Instantiate(m_targetIndicator, Vector3.zero, Quaternion.identity);
-        m_targetIndicator.name = "Target";
-
-        m_objectiveIndicator = Instantiate(m_objectiveIndicator, Vector3.zero, Quaternion.identity);
-        m_objectiveIndicator.transform.position = new Vector3(0, 10000, 0);
+        // m_targetIndicator = Instantiate(m_targetIndicator, Vector3.zero, Quaternion.identity);
+        // m_targetIndicator.name = "Target";
+        //
+        // m_objectiveIndicator = Instantiate(m_objectiveIndicator, Vector3.zero, Quaternion.identity);
+        // m_objectiveIndicator.transform.position = new Vector3(0, 10000, 0);
 
         SetFPS(m_fpsLimit);
     }
@@ -48,21 +48,12 @@ public class CameraController : MonoBehaviour
         if (!m_enabled)
             return;
 
-        if (Input.GetButtonDown("Fire1"))
-        {
-            var ray = m_camera.ScreenPointToRay(Input.mousePosition);
-
-            if (Physics.Raycast(ray, out var hit))
-                SetDestination(hit.point);
-        }
-
         if (Input.GetButtonDown("Reset"))
         {
             transform.position = m_originalPosition;
         }
 
         MoveCamera();
-        Aim();
     }
 
     private void MoveCamera()
@@ -81,21 +72,6 @@ public class CameraController : MonoBehaviour
         if (dh != 0)
         {
             transform.Translate(new Vector3(0, dh, 0), Space.World);
-        }
-    }
-
-    private void Aim()
-    {
-        var ray = m_camera.ScreenPointToRay(Input.mousePosition);
-
-        if (Physics.Raycast(ray, out var hit))
-        {
-            m_targetIndicator.SetActive(true);
-            m_targetIndicator.transform.position = hit.point;
-        }
-        else
-        {
-            m_targetIndicator.SetActive(false);
         }
     }
 
