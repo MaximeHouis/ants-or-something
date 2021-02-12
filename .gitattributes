@@ -1,6 +1,4 @@
-﻿TextMesh\ Pro/**    linguist-vendored
-
-### From https://github.com/alexkaratarakis/gitattributes/blob/master/Unity.gitattributes
+﻿### From https://github.com/alexkaratarakis/gitattributes/blob/master/Unity.gitattributes
 
 # Unity
 *.cginc              text
