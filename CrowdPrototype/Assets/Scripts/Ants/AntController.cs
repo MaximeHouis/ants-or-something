@@ -10,30 +10,21 @@ public class AntController : MonoBehaviour
 {
     public static readonly List<AntController> s_instances = new List<AntController>();
 
+    public bool m_selected;
+
     [HideInInspector] public NavMeshAgent m_agent;
 
-    private bool m_touchedGround = false;
+    private MeshRenderer m_renderer;
+    private bool m_touchedGround;
     private Vector3? m_destination = null;
     private AntClass m_class;
-
-    public AntClass Class
-    {
-        get => m_class;
-        set
-        {
-            m_class = value;
-
-            var color = value.Color();
-            GetComponent<MeshRenderer>().materials[0].color = color;
-            GetComponent<MeshRenderer>().materials[1].color = color * (2f / 3f);
-        }
-    }
 
     private void Start()
     {
         s_instances.Add(this);
 
         m_agent = GetComponent<NavMeshAgent>();
+        m_renderer = GetComponent<MeshRenderer>();
     }
 
     private void OnDestroy()
@@ -57,7 +48,9 @@ public class AntController : MonoBehaviour
 
         foreach (var ratio in ratios.Where(ratio => range < ratio.Value))
         {
-            Class = ratio.Key;
+            m_class = ratio.Key;
+            StartCoroutine(SetColor());
+
             return;
         }
 
@@ -74,5 +67,22 @@ public class AntController : MonoBehaviour
         m_agent.SetDestination(dest);
 
         m_destination = dest;
+    }
+
+    public void SetSelected(bool value)
+    {
+        m_selected = value;
+    }
+
+    private IEnumerator SetColor()
+    {
+        // Wait until the component is fully initialized
+        while (!m_renderer)
+            yield return new WaitForFixedUpdate();
+
+        var color = m_class.Color();
+
+        m_renderer.materials[0].color = color;
+        m_renderer.materials[1].color = color * (2f / 3f);
     }
 }

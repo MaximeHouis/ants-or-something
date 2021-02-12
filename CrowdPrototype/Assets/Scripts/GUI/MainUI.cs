@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class MainUI : MonoBehaviour
 {
@@ -9,6 +10,8 @@ public class MainUI : MonoBehaviour
     private Vector3 m_rectBegin;
     private Vector3 m_rectEnd;
     private Vector3 Delta => m_rectEnd - m_rectBegin;
+    private Rect m_selectionRect;
+    private Camera m_camera;
 
     private bool MouseDrag
     {
@@ -24,7 +27,11 @@ public class MainUI : MonoBehaviour
     {
         MouseDrag = false;
 
+        m_camera = Camera.main;
         m_selectionTransform = m_selectionPanel.GetComponent<RectTransform>();
+
+        if (!m_camera)
+            throw new NullReferenceException("No main camera");
     }
 
     private void Update()
@@ -45,6 +52,7 @@ public class MainUI : MonoBehaviour
             {
                 MouseDrag = false;
                 m_rectEnd = mousePosition;
+                Select();
             }
         }
 
@@ -58,8 +66,17 @@ public class MainUI : MonoBehaviour
                 Mathf.Max(m_rectBegin.y, mousePosition.y));
             var delta = topRight - bottomLeft;
 
-            m_selectionTransform.anchoredPosition = bottomLeft;
+            m_selectionRect = new Rect(bottomLeft, delta);
             m_selectionTransform.sizeDelta = delta;
+            m_selectionTransform.anchoredPosition = bottomLeft;
+        }
+    }
+
+    private void Select()
+    {
+        foreach (var ant in AntController.s_instances)
+        {
+            ant.SetSelected(m_selectionRect.Contains(m_camera.WorldToScreenPoint(ant.transform.position)));
         }
     }
 }
