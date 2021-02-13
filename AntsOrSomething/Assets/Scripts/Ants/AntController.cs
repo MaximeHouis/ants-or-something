@@ -32,6 +32,12 @@ public class AntController : MonoBehaviour
         s_instances.Remove(this);
     }
 
+    private void Update()
+    {
+        if (m_destination.HasValue && Vector3.Distance(transform.position, (Vector3) m_destination) <= 1f)
+            m_agent.ResetPath();
+    }
+
     private void OnCollisionEnter(Collision _)
     {
         if (m_touchedGround)

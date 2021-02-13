@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using UnityEngine;
 
 public class CameraController : MonoBehaviour
@@ -53,6 +54,14 @@ public class CameraController : MonoBehaviour
             transform.position = m_originalPosition;
         }
 
+        if (Input.GetMouseButtonDown(1))
+        {
+            var ray = m_camera.ScreenPointToRay(Input.mousePosition);
+            
+            if (Physics.Raycast(ray, out var hit))
+                SetDestination(hit.point);
+        }
+
         MoveCamera();
     }
 
@@ -82,7 +91,7 @@ public class CameraController : MonoBehaviour
 
     private void SetDestination(Vector3 dest)
     {
-        foreach (var ant in AntController.s_instances)
+        foreach (var ant in AntController.s_instances.Where(a => a.m_selected))
         {
             StartCoroutine(ant.SetDestination(dest));
         }
