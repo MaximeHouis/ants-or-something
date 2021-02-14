@@ -1,5 +1,20 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-2998030108013651730
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3749466004704527699}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a1b452a03cb6604a97ac0927dc07e66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Minimum: 0.42
+  m_Maximum: 0.84
+  m_showGizmos: 0
 --- !u!195 &-1683109823542834685
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -36,21 +51,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_selected: 0
   m_agent: {fileID: 0}
---- !u!114 &-2998030108013651730
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3749466004704527699}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a1b452a03cb6604a97ac0927dc07e66, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Minimum: 0.42
-  m_Maximum: 0.84
-  m_showGizmos: 0
 --- !u!1001 &5666058398227605551
 PrefabInstance:
   m_ObjectHideFlags: 0
