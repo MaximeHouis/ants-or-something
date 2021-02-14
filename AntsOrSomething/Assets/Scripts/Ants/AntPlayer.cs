@@ -9,12 +9,20 @@ public class AntPlayer : MonoBehaviour
 
     [Min(0)] public float m_rotationSpeed = 15f;
 
+    [Header("Ant Call")]
+    public GameObject m_particles;
+
+    private ParticleSystem m_particleSystem;
+
     private Rigidbody m_rigidbody;
     private Vector3 m_targetAngle = Vector3.zero;
 
     private void Start()
     {
         m_rigidbody = GetComponent<Rigidbody>();
+
+        if (m_particles)
+            m_particleSystem = m_particles.GetComponent<ParticleSystem>();
     }
 
     private void Update()
@@ -28,6 +36,8 @@ public class AntPlayer : MonoBehaviour
                 var point = Random.insideUnitCircle * 2f;
                 StartCoroutine(ant.SetDestination(pos + new Vector3(point.x, 0, point.y)));
             }
+
+            FireParticles();
         }
     }
 
@@ -59,5 +69,15 @@ public class AntPlayer : MonoBehaviour
     {
         transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(m_targetAngle),
             Time.fixedDeltaTime * m_rotationSpeed);
+    }
+
+    private void FireParticles()
+    {
+        if (!m_particles)
+            return;
+
+        var system = Instantiate(m_particles, transform.position, Quaternion.identity);
+        
+        Destroy(system, 5f);
     }
 }
