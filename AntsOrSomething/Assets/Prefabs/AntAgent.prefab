@@ -11,13 +11,13 @@ GameObject:
   - component: {fileID: 8206391729551112134}
   - component: {fileID: 5065756116480686179}
   - component: {fileID: 7037394559168875689}
-  - component: {fileID: 6452701135653873189}
+  - component: {fileID: 3432410146900321463}
   - component: {fileID: 8081970619092227355}
   - component: {fileID: 7034987614500661662}
   - component: {fileID: 994033776972886993}
   - component: {fileID: 8074555501110883924}
   m_Layer: 2
-  m_Name: Ant
+  m_Name: AntAgent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -86,8 +86,8 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!64 &6452701135653873189
-MeshCollider:
+--- !u!65 &3432410146900321463
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -96,10 +96,9 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -6427917474867546475, guid: 80b5998cbb4105b48a1ed91933788547, type: 3}
+  serializedVersion: 2
+  m_Size: {x: 0.33333334, y: 0.22627951, z: 0.4603106}
+  m_Center: {x: 0, y: -0.014199071, z: -0.09233488}
 --- !u!54 &8081970619092227355
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -114,7 +113,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 80
   m_CollisionDetection: 2
 --- !u!195 &7034987614500661662
 NavMeshAgent:
@@ -134,7 +133,7 @@ NavMeshAgent:
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
-  m_Height: 0.33333334
+  m_Height: 0.25
   m_BaseOffset: 0.1275
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4

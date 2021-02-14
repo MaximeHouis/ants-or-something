@@ -7,9 +7,6 @@ public class CameraController : MonoBehaviour
     [Header("General config")]
     public Transform m_centerAnchor;
 
-    public GameObject m_targetIndicator;
-    public GameObject m_objectiveIndicator;
-
     [Header("Controls")]
     public bool m_enabled = true;
 
@@ -91,12 +88,10 @@ public class CameraController : MonoBehaviour
 
     private void SetDestination(Vector3 dest)
     {
-        foreach (var ant in AntController.s_instances.Where(a => a.m_selected))
+        foreach (var ant in AntAgent.s_instances.Where(a => a.m_selected))
         {
             StartCoroutine(ant.SetDestination(dest));
         }
-
-        m_objectiveIndicator.transform.position = dest;
     }
 
     private void OnDrawGizmosSelected()
@@ -105,9 +100,6 @@ public class CameraController : MonoBehaviour
 
         Gizmos.color = Color.grey;
         Gizmos.DrawLine(position, m_centerAnchor.transform.position);
-
-        Gizmos.color = Color.red;
-        Gizmos.DrawLine(position, m_targetIndicator.transform.position);
     }
 
     [ContextMenu("Look At Anchor")]

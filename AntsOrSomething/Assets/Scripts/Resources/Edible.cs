@@ -10,7 +10,7 @@ public class Edible : MonoBehaviour
 
     private bool m_free = true;
 
-    public bool Eat(AntController antController)
+    public bool Eat(AntAgent antAgent)
     {
         if (!m_free)
             return false;

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5240640208783669975}
   - component: {fileID: 5240640208783669968}
   - component: {fileID: 5240640208783669969}
-  - component: {fileID: 5240640208783669974}
+  - component: {fileID: 5999101175929061734}
   m_Layer: 2
   m_Name: FlyCam
   m_TagString: MainCamera
@@ -84,7 +84,7 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5240640208783669970}
   m_Enabled: 1
---- !u!114 &5240640208783669974
+--- !u!114 &5999101175929061734
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -93,16 +93,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 5240640208783669970}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5d86ac828a61eaa43a616386bcdfd595, type: 3}
+  m_Script: {fileID: 11500000, guid: 7871343fbc334c34986857f9116fe828, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_centerAnchor: {x: 0, y: 0, z: 0}
-  m_targetIndicator: {fileID: 2623490878750638298, guid: dd2794a6762ef6243bc87cf72fedf005,
-    type: 3}
-  m_objectiveIndicator: {fileID: 3114698447213512203, guid: d0ba7c8256476764ea29fbfce04a40af,
-    type: 3}
-  m_enabled: 0
-  m_sensitivity: 1
-  m_speed: 20
-  m_rotationLockX: 89.9
-  m_fpsLimit: 0
+  m_target: {fileID: 0}
+  m_lagSpeed: 5
+  m_distance: 5
+  m_offset: {x: 0, y: 1, z: 0}

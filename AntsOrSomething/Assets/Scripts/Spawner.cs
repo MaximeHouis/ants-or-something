@@ -51,7 +51,7 @@ public class Spawner : MonoBehaviour
             var entity = Instantiate(m_entity, pos, Quaternion.identity, transform);
 
             entity.name = "Ant #" + (i + 1);
-            entity.GetComponent<AntController>().AssignClass(m_colonyConfig.Ratios, i, m_count);
+            entity.GetComponent<AntAgent>().AssignClass(m_colonyConfig.Ratios, i, m_count);
 
             if (Interval != 0)
                 yield return new WaitForSeconds(Interval);

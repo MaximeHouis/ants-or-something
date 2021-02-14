@@ -74,7 +74,7 @@ public class MainUI : MonoBehaviour
 
     private void Select()
     {
-        foreach (var ant in AntController.s_instances)
+        foreach (var ant in AntAgent.s_instances)
         {
             ant.SetSelected(m_selectionRect.Contains(m_camera.WorldToScreenPoint(ant.transform.position)));
         }

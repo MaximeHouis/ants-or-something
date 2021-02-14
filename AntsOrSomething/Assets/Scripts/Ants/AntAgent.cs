@@ -6,9 +6,9 @@ using UnityEngine;
 using UnityEngine.AI;
 
 [RequireComponent(typeof(NavMeshAgent))]
-public class AntController : MonoBehaviour
+public class AntAgent : MonoBehaviour
 {
-    public static readonly List<AntController> s_instances = new List<AntController>();
+    public static readonly List<AntAgent> s_instances = new List<AntAgent>();
 
     public bool m_selected;
 
