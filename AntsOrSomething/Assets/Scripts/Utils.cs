@@ -10,14 +10,6 @@ public static class Utils
         b = tmp;
     }
 
-    public static Vector2 RandomPointInCircle(float radius)
-    {
-        var angle = Random.value * 2.0f * Mathf.PI;
-        var distance = radius * Mathf.Sqrt(Random.value);
-
-        return new Vector2(distance * Mathf.Cos(angle), distance * Mathf.Sin(angle));
-    }
-
     public static Vector3 RandomPointInBox(Vector3 position, Vector3 size)
     {
         size /= 2.0f; // from center

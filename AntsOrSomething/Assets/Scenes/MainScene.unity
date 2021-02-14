@@ -1632,6 +1632,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29aa1a73880e45445b1c991070b1c169, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1047292594 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3749466004704527699, guid: 14f70c5e5e84c1c4da300857c228beb6,
+    type: 3}
+  m_PrefabInstance: {fileID: 1625387376}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1107039416
 GameObject:
   m_ObjectHideFlags: 0
@@ -1696,7 +1702,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1235263938
 GameObject:
@@ -2205,7 +2211,7 @@ Transform:
   - {fileID: 312180277}
   - {fileID: 1235263943}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: -90.00001, z: 0}
 --- !u!1 &1464894331
 GameObject:
@@ -2700,15 +2706,25 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 499792473417746266, guid: 14f70c5e5e84c1c4da300857c228beb6,
+        type: 3}
+      propertyPath: m_rotationSpeed
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 3749466004704527699, guid: 14f70c5e5e84c1c4da300857c228beb6,
         type: 3}
       propertyPath: m_Name
       value: AntPlayer
       objectReference: {fileID: 0}
+    - target: {fileID: 3917287087331733039, guid: 14f70c5e5e84c1c4da300857c228beb6,
+        type: 3}
+      propertyPath: m_respawnPoint
+      value: 
+      objectReference: {fileID: 1979023496}
     - target: {fileID: 4558513479901863913, guid: 14f70c5e5e84c1c4da300857c228beb6,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 4558513479901863913, guid: 14f70c5e5e84c1c4da300857c228beb6,
         type: 3}
@@ -2925,6 +2941,12 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!4 &1979023496 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4983790288630961100, guid: 2a68fd57b604a6c4bbbd349a4a35659e,
+    type: 3}
+  m_PrefabInstance: {fileID: 4983790289339613063}
+  m_PrefabAsset: {fileID: 0}
 --- !u!43 &2111630496
 Mesh:
   m_ObjectHideFlags: 0
@@ -3336,7 +3358,7 @@ PrefabInstance:
     - target: {fileID: 5240640208783669975, guid: de21953cded702445811ef7a8bc18082,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 25.01
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 5240640208783669975, guid: de21953cded702445811ef7a8bc18082,
         type: 3}
@@ -3346,7 +3368,7 @@ PrefabInstance:
     - target: {fileID: 5240640208783669975, guid: de21953cded702445811ef7a8bc18082,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 2.88
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 5240640208783669975, guid: de21953cded702445811ef7a8bc18082,
         type: 3}
@@ -3387,7 +3409,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1047292594}
     - target: {fileID: 5999101175929061734, guid: de21953cded702445811ef7a8bc18082,
         type: 3}
       propertyPath: m_distance

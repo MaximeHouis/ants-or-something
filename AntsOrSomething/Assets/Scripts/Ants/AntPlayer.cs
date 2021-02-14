@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using Random = UnityEngine.Random;
 
 [RequireComponent(typeof(Rigidbody))]
 public class AntPlayer : MonoBehaviour
@@ -14,6 +15,20 @@ public class AntPlayer : MonoBehaviour
     private void Start()
     {
         m_rigidbody = GetComponent<Rigidbody>();
+    }
+
+    private void Update()
+    {
+        if (Input.GetButtonDown("Call"))
+        {
+            var pos = transform.position;
+            
+            foreach (var ant in AntAgent.s_instances)
+            {
+                var point = Random.insideUnitCircle * 2f;
+                StartCoroutine(ant.SetDestination(pos + new Vector3(point.x, 0, point.y)));
+            }
+        }
     }
 
     private void FixedUpdate()
