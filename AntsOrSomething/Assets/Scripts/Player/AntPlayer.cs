@@ -27,8 +27,8 @@ public class AntPlayer : MonoBehaviour
         // No need for fixed delta time because we want an instant move
         
         var x = Input.GetAxis("Horizontal") * m_speed;
-        var y = Input.GetAxis("Vertical") * m_speed;
+        var z = Input.GetAxis("Vertical") * m_speed;
 
-        m_rigidbody.velocity = new Vector3(x, 0, y);
+        m_rigidbody.velocity = new Vector3(x, m_rigidbody.velocity.y, z);
     }
 }
