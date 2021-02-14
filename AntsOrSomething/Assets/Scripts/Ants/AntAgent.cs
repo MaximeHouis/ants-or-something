@@ -34,7 +34,7 @@ public class AntAgent : MonoBehaviour
 
     private void Update()
     {
-        if (m_destination.HasValue && Vector3.Distance(transform.position, (Vector3) m_destination) <= 1f)
+        if (m_destination.HasValue && Vector3.Distance(transform.position, (Vector3) m_destination) <= 0.1f)
             m_agent.ResetPath();
     }
 
