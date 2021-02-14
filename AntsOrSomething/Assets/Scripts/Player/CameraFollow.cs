@@ -24,9 +24,9 @@ public class CameraFollow : MonoBehaviour
             throw new NullReferenceException("Main camera not found");
     }
 
-#if !UNITY_EDITOR
     public void Update()
     {
+#if !UNITY_EDITOR
         if (Input.GetKeyDown(KeyCode.F2))
         {
             if (QualitySettings.vSyncCount == 0)
@@ -38,8 +38,8 @@ public class CameraFollow : MonoBehaviour
                 QualitySettings.vSyncCount = 0;
             }
         }
-    }
 #endif
+    }
 
     public void FixedUpdate()
     {
