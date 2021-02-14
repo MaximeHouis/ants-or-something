@@ -26,6 +26,16 @@ public class CameraFollow : MonoBehaviour
 
     public void Update()
     {
+        var zoom = Input.GetAxis("Mouse ScrollWheel");
+
+        if (zoom != 0)
+        {
+            m_distance -= Mathf.Sign(zoom);
+            
+            if (m_distance < 0)
+                m_distance = 0;
+        }
+        
 #if !UNITY_EDITOR
         if (Input.GetKeyDown(KeyCode.F2))
         {
