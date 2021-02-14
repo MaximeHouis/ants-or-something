@@ -24,19 +24,9 @@ public class CameraFollow : MonoBehaviour
             throw new NullReferenceException("Main camera not found");
     }
 
+#if !UNITY_EDITOR
     public void Update()
     {
-        var zoom = Input.GetAxis("Mouse ScrollWheel");
-
-        if (zoom != 0)
-        {
-            m_distance -= Mathf.Sign(zoom);
-            
-            if (m_distance < 0)
-                m_distance = 0;
-        }
-        
-#if !UNITY_EDITOR
         if (Input.GetKeyDown(KeyCode.F2))
         {
             if (QualitySettings.vSyncCount == 0)
@@ -48,8 +38,8 @@ public class CameraFollow : MonoBehaviour
                 QualitySettings.vSyncCount = 0;
             }
         }
-#endif
     }
+#endif
 
     public void FixedUpdate()
     {
