@@ -2721,6 +2721,11 @@ PrefabInstance:
       propertyPath: m_respawnPoint
       value: 
       objectReference: {fileID: 1979023496}
+    - target: {fileID: 4506149819682356532, guid: 14f70c5e5e84c1c4da300857c228beb6,
+        type: 3}
+      propertyPath: m_Mass
+      value: 1e+9
+      objectReference: {fileID: 0}
     - target: {fileID: 4558513479901863913, guid: 14f70c5e5e84c1c4da300857c228beb6,
         type: 3}
       propertyPath: m_RootOrder
