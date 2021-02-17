@@ -345,7 +345,7 @@ NavMeshObstacle:
   m_Carve: 1
   m_CarveOnlyStationary: 0
   m_Center: {x: 0.5, y: 0.5, z: -0.5}
-  m_TimeToStationary: 0.5
+  m_TimeToStationary: 0
 --- !u!114 &8904120838552145096
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -25,7 +25,7 @@ NavMeshAgent:
   m_Enabled: 0
   m_AgentTypeID: 0
   m_Radius: 0.25
-  m_Speed: 7.5
+  m_Speed: 15
   m_Acceleration: 150
   avoidancePriority: 99
   m_AngularSpeed: 500
@@ -58,44 +58,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 8081970619092227355, guid: 43f08594d3c3cc148a773e13caced444,
+        type: 3}
+      propertyPath: m_Mass
+      value: 0.0000001
+      objectReference: {fileID: 0}
     - target: {fileID: 8206391729551112134, guid: 43f08594d3c3cc148a773e13caced444,
         type: 3}
       propertyPath: m_RootOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8206391729551112134, guid: 43f08594d3c3cc148a773e13caced444,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8206391729551112134, guid: 43f08594d3c3cc148a773e13caced444,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8206391729551112134, guid: 43f08594d3c3cc148a773e13caced444,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8206391729551112134, guid: 43f08594d3c3cc148a773e13caced444,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8206391729551112134, guid: 43f08594d3c3cc148a773e13caced444,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8206391729551112134, guid: 43f08594d3c3cc148a773e13caced444,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8206391729551112134, guid: 43f08594d3c3cc148a773e13caced444,
-        type: 3}
-      propertyPath: m_LocalRotation.z
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8206391729551112134, guid: 43f08594d3c3cc148a773e13caced444,

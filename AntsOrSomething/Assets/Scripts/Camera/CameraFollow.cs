@@ -4,17 +4,16 @@ using UnityEngine;
 public class CameraFollow : MonoBehaviour
 {
     [Header("Target")]
-    public GameObject m_target;
+    public Transform m_target;
+
+    public Vector3 m_offset;
 
     [Header("Camera Settings")]
     [Min(0)] public float m_lagSpeed = 5f;
 
-    public float m_distance = 5f;
-    public Vector3 m_offset = new Vector3(0, 1, 0);
-
     private Camera m_camera;
 
-    private Vector3 TargetPos => m_target.transform.position;
+    private Vector3 TargetPos => m_target.position;
 
     public void Start()
     {
@@ -22,6 +21,8 @@ public class CameraFollow : MonoBehaviour
 
         if (!m_camera)
             throw new NullReferenceException("Main camera not found");
+
+        UpdateCameraPosition();
     }
 
 #if !UNITY_EDITOR
@@ -49,9 +50,9 @@ public class CameraFollow : MonoBehaviour
     [ContextMenu("Update Camera Position")]
     public void UpdateCameraPosition()
     {
+        var delta = Time.fixedDeltaTime;
         var position = transform.position;
-        var targetPos = TargetPos + (m_offset * m_distance);
-        var interpolation = Time.deltaTime * m_lagSpeed;
+        var interpolation = delta * m_lagSpeed;
 
         if (m_lagSpeed == 0)
             interpolation = 1;
@@ -61,20 +62,16 @@ public class CameraFollow : MonoBehaviour
             interpolation = 1;
 #endif
 
-        position.x = Mathf.Lerp(position.x, targetPos.x, interpolation);
-        position.y = Mathf.Lerp(position.y, targetPos.y, interpolation);
-        position.z = Mathf.Lerp(position.z, targetPos.z, interpolation);
-
-        transform.position = position;
+        transform.position = Vector3.Lerp(position, TargetPos + m_offset, interpolation);
     }
 
     [ContextMenu("Look At Target")]
     public void LookAtTarget()
     {
-        transform.LookAt(m_target.transform);
+        transform.LookAt(m_target);
     }
 
-    [ContextMenu("Update Pos & LookAt")]
+    [ContextMenu("Update Pos And LookAt")]
     public void UpdatePosAndLookAt()
     {
         UpdateCameraPosition();
@@ -86,5 +83,14 @@ public class CameraFollow : MonoBehaviour
         if (!m_target)
             return;
         UpdatePosAndLookAt();
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        if (m_target)
+        {
+            Gizmos.color = Color.gray;
+            Gizmos.DrawLine(transform.position, m_target.position);
+        }
     }
 }

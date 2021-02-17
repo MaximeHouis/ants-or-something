@@ -30,7 +30,7 @@ public class AntPlayer : MonoBehaviour
         if (Input.GetButtonDown("Call"))
         {
             var pos = transform.position;
-            
+
             foreach (var ant in AntAgent.s_instances)
             {
                 var point = Random.insideUnitCircle * 2f;
@@ -77,7 +77,7 @@ public class AntPlayer : MonoBehaviour
             return;
 
         var system = Instantiate(m_particles, transform.position, Quaternion.identity);
-        
+
         Destroy(system, 5f);
     }
 }
