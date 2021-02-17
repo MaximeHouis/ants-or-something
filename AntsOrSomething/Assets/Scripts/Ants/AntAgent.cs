@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
+using Random = UnityEngine.Random;
 
 [RequireComponent(typeof(NavMeshAgent))]
 public class AntAgent : MonoBehaviour
@@ -25,6 +26,8 @@ public class AntAgent : MonoBehaviour
 
         m_agent = GetComponent<NavMeshAgent>();
         m_renderer = GetComponent<MeshRenderer>();
+
+        SetColor();
     }
 
     private void OnDestroy()
@@ -55,7 +58,7 @@ public class AntAgent : MonoBehaviour
         foreach (var ratio in ratios.Where(ratio => range < ratio.Value))
         {
             m_class = ratio.Key;
-            StartCoroutine(SetColor());
+            // StartCoroutine(SetColor());
 
             return;
         }
@@ -80,13 +83,9 @@ public class AntAgent : MonoBehaviour
         m_selected = value;
     }
 
-    private IEnumerator SetColor()
+    private void SetColor()
     {
-        // Wait until the component is fully initialized
-        while (!m_renderer)
-            yield return new WaitForFixedUpdate();
-
-        var color = m_class.Color();
+        var color = Random.ColorHSV(0, 1f, 1f, 1f, 0.5f, 0.75f);
 
         m_renderer.materials[0].color = color;
         m_renderer.materials[1].color = color * (2f / 3f);
