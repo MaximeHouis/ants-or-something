@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 8907372176130490159}
   - component: {fileID: 8081970619092227355}
   - component: {fileID: -505214811565963776}
+  - component: {fileID: 6803847826395637722}
   m_Layer: 2
   m_Name: Ant
   m_TagString: Untagged
@@ -128,3 +129,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_respawnPoint: {fileID: 0}
   m_yWarpLimit: -42
+--- !u!114 &6803847826395637722
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8838636841917263228}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3f9216429607e54e9ffedef8e9087a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

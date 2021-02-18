@@ -16,63 +16,6 @@ MonoBehaviour:
   m_rotationSpeed: 20
   m_particles: {fileID: 3996852385631663542, guid: d1d31aad30df8ba47a2178d4834bc1f0,
     type: 3}
---- !u!1 &8503984313361306942
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2488858018230716519}
-  - component: {fileID: 8897591637257099725}
-  - component: {fileID: 2544831827078987050}
-  m_Layer: 2
-  m_Name: Sphere
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!4 &2488858018230716519
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8503984313361306942}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 4558513479901863913}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &8897591637257099725
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8503984313361306942}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 1.25
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &2544831827078987050
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8503984313361306942}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 69dd14bb5caa1194b86928fd7bdc8efd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &5666058398227605551
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -115,12 +58,6 @@ PrefabInstance:
 --- !u!1 &3749466004704527699 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8838636841917263228, guid: 43f08594d3c3cc148a773e13caced444,
-    type: 3}
-  m_PrefabInstance: {fileID: 5666058398227605551}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &4558513479901863913 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 8206391729551112134, guid: 43f08594d3c3cc148a773e13caced444,
     type: 3}
   m_PrefabInstance: {fileID: 5666058398227605551}
   m_PrefabAsset: {fileID: 0}
