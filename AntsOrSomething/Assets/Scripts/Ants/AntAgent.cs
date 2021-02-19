@@ -1,10 +1,17 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
 using Random = UnityEngine.Random;
+
+public enum AntClass
+{
+    Worker,
+    Soldier,
+    Breeder,
+    Scout
+}
 
 [RequireComponent(typeof(NavMeshAgent), typeof(CheckpointTracker))]
 public class AntAgent : MonoBehaviour

@@ -3,6 +3,8 @@
 [RequireComponent(typeof(Collider))]
 public class Checkpoint : MonoBehaviour
 {
+    [HideInInspector] public Checkpoint Next;
+
     public uint m_index;
 
     private void OnTriggerEnter(Collider other)
@@ -11,20 +13,29 @@ public class Checkpoint : MonoBehaviour
 
         if (!tracker)
             return;
-        
     }
 
     private void OnDrawGizmos()
     {
-        var collider = GetComponent<Collider>();
+        var col = GetComponent<Collider>();
 
-        if (!collider)
+        if (!col)
         {
             Debug.LogError("Failed to get collider");
             return;
         }
 
         Gizmos.color = Color.green * new Color(1f, 1f, 1f, 0.5f);
-        Gizmos.DrawCube(collider.bounds.center, collider.bounds.size);
+        Gizmos.DrawCube(col.bounds.center, col.bounds.size);
+    }
+
+    public static bool operator <(Checkpoint a, Checkpoint b)
+    {
+        return a.m_index < b.m_index;
+    }
+
+    public static bool operator >(Checkpoint a, Checkpoint b)
+    {
+        return a.m_index > b.m_index;
     }
 }

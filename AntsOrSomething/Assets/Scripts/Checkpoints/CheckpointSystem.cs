@@ -6,7 +6,7 @@ using UnityEngine;
 [ExecuteAlways]
 public class CheckpointSystem : MonoBehaviour
 {
-    private List<Checkpoint> m_checkpoints = new List<Checkpoint>();
+    private readonly List<Checkpoint> m_checkpoints = new List<Checkpoint>();
 
     private void Awake()
     {
@@ -15,13 +15,16 @@ public class CheckpointSystem : MonoBehaviour
             m_checkpoints.Add(checkpoint);
         }
 
-        if (m_checkpoints.Count == 0)
-        {
-            Debug.LogError("No checkpoint in children");
-            return;
-        }
+        if (m_checkpoints.Count < 2)
+            throw new ArgumentOutOfRangeException($"At least 2 checkpoints are needed");
 
         m_checkpoints.Sort((a, b) => a.m_index > b.m_index ? 1 : -1);
+
+        var size = m_checkpoints.Count;
+        for (var i = 0; i < size; i++)
+        {
+            m_checkpoints[i].Next = i + 1 < size ? m_checkpoints[i + 1] : m_checkpoints[0];
+        }
     }
 
     private void OnDrawGizmosSelected()

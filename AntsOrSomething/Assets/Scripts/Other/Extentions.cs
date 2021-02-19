@@ -1,13 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
-
-public enum AntClass
-{
-    Worker,
-    Soldier,
-    Breeder,
-    Scout
-}
 
 public static class Extensions
 {
@@ -27,5 +20,14 @@ public static class Extensions
             default:
                 throw new ArgumentOutOfRangeException(nameof(antClass), antClass, null);
         }
+    }
+
+    public static T Last<T>(this List<T> list)
+    {
+        var size = list.Count;
+
+        if (size == 0)
+            throw new IndexOutOfRangeException("List is empty");
+        return list[size - 1];
     }
 }
