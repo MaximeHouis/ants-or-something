@@ -23,9 +23,12 @@ public class AntAgent : MonoBehaviour
     [HideInInspector] public NavMeshAgent m_agent;
 
     private CheckpointTracker m_checkpointTracker;
+    private Checkpoint m_currentCheckpoint;
     private MeshRenderer m_renderer;
     private bool m_touchedGround;
-    private Vector3? m_destination;
+
+    [Tooltip("Changing this has no effect, debug only")]
+    public Vector3 m_destination;
 
     private void Start()
     {
@@ -43,18 +46,31 @@ public class AntAgent : MonoBehaviour
         s_instances.Remove(this);
     }
 
-    private void Update()
+    // private void Update()
+    // {
+    //     if (m_destination.HasValue && Vector3.Distance(transform.position, (Vector3) m_destination) <= 0.1f)
+    //         m_agent.ResetPath();
+    // }
+
+    public void BeginRace()
     {
-        if (m_destination.HasValue && Vector3.Distance(transform.position, (Vector3) m_destination) <= 0.1f)
-            m_agent.ResetPath();
+        GoToNextCheckpoint();
     }
 
-    public void StartRace()
+    private void GoToNextCheckpoint()
     {
-        
+        var next = m_currentCheckpoint ? m_currentCheckpoint.Next : CheckpointSystem.Instance.Checkpoints[0];
+
+        StartCoroutine(SetDestination(Utils.RandomPointInBox(next.Box)));
+        m_currentCheckpoint = next;
     }
 
-    private void OnCollisionEnter(Collision _)
+    public void NextCheckpoint()
+    {
+        GoToNextCheckpoint();
+    }
+
+    private void OnCollisionEnter()
     {
         if (m_touchedGround)
             return;
@@ -85,5 +101,11 @@ public class AntAgent : MonoBehaviour
 
         m_renderer.materials[0].color = color;
         m_renderer.materials[1].color = color * (2f / 3f);
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawLine(transform.position, m_destination);
     }
 }

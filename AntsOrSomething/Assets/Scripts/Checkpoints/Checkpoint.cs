@@ -1,27 +1,44 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
+using UnityEngine.Serialization;
 
-[RequireComponent(typeof(Collider))]
+#pragma warning disable CS0660
+#pragma warning disable CS0661
+
+[RequireComponent(typeof(BoxCollider))]
 public class Checkpoint : MonoBehaviour
 {
     [HideInInspector] public Checkpoint Next;
+    [HideInInspector] public BoxCollider Box;
 
-    public uint m_index;
+    [FormerlySerializedAs("m_index")] public uint Index;
+
+    private void Awake()
+    {
+        Box = GetComponent<BoxCollider>();
+    }
 
     private void OnTriggerEnter(Collider other)
     {
-        var tracker = GetComponent<CheckpointTracker>();
+        var tracker = other.GetComponent<CheckpointTracker>();
+        var antAgent = other.GetComponent<AntAgent>();
 
         if (!tracker)
             return;
+
+        if (antAgent)
+        {
+            antAgent.NextCheckpoint();
+        }
     }
 
     private void OnDrawGizmos()
     {
-        var col = GetComponent<Collider>();
+        var col = GetComponent<BoxCollider>();
 
         if (!col)
         {
-            Debug.LogError("Failed to get collider");
+            Debug.LogError("Failed to get BoxCollider");
             return;
         }
 
@@ -29,13 +46,37 @@ public class Checkpoint : MonoBehaviour
         Gizmos.DrawCube(col.bounds.center, col.bounds.size);
     }
 
+    public static bool operator ==(Checkpoint a, Checkpoint b)
+    {
+        if (a is null && b is null)
+            return true;
+        if (a is null || b is null)
+            return false;
+        return a.Index == b.Index;
+    }
+
+    public static bool operator !=(Checkpoint a, Checkpoint b)
+    {
+        return !(a == b);
+    }
+
     public static bool operator <(Checkpoint a, Checkpoint b)
     {
-        return a.m_index < b.m_index;
+        return a.Index < b.Index;
     }
 
     public static bool operator >(Checkpoint a, Checkpoint b)
     {
-        return a.m_index > b.m_index;
+        return a.Index > b.Index;
+    }
+
+    public static bool operator <=(Checkpoint a, Checkpoint b)
+    {
+        return a < b || a == b;
+    }
+
+    public static bool operator >=(Checkpoint a, Checkpoint b)
+    {
+        return a > b || a == b;
     }
 }

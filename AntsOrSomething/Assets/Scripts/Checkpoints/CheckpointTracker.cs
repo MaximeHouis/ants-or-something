@@ -26,7 +26,7 @@ public class CheckpointTracker : MonoBehaviour
                 }
             }
             
-            Debug.Log("Added " + m_checkpointsOriginal.Count + " checkpoints");
+            Debug.Log("Registered " + m_checkpointsOriginal.Count + " checkpoints");
         }
 
         foreach (var checkpoint in m_checkpointsOriginal)

@@ -6,42 +6,47 @@ using UnityEngine;
 [ExecuteAlways]
 public class CheckpointSystem : MonoBehaviour
 {
-    private readonly List<Checkpoint> m_checkpoints = new List<Checkpoint>();
+    public static CheckpointSystem Instance;
+
+    public List<Checkpoint> Checkpoints { get; } = new List<Checkpoint>();
 
     private void Awake()
     {
+        Instance = this;
+
         foreach (var checkpoint in GetComponentsInChildren<Checkpoint>())
         {
-            m_checkpoints.Add(checkpoint);
+            Checkpoints.Add(checkpoint);
         }
 
-        if (m_checkpoints.Count < 2)
+        if (Checkpoints.Count < 2)
             throw new ArgumentOutOfRangeException($"At least 2 checkpoints are needed");
 
-        m_checkpoints.Sort((a, b) => a.m_index > b.m_index ? 1 : -1);
+        Checkpoints.Sort((a, b) => a.Index > b.Index ? 1 : -1);
 
-        var size = m_checkpoints.Count;
+        var size = Checkpoints.Count;
         for (var i = 0; i < size; i++)
         {
-            m_checkpoints[i].Next = i + 1 < size ? m_checkpoints[i + 1] : m_checkpoints[0];
+            Checkpoints[i].Index = (uint) i;
+            Checkpoints[i].Next = i + 1 < size ? Checkpoints[i + 1] : Checkpoints[0];
         }
     }
 
     private void OnDrawGizmosSelected()
     {
-        var size = m_checkpoints.Count;
+        var size = Checkpoints.Count;
         Gizmos.color = Color.green * new Color(0.75f, 0.75f, 0.75f, 1f);
 
         for (var i = 0; i < size; i++)
         {
             if (i == 0)
             {
-                Gizmos.DrawLine(m_checkpoints[size - 1].transform.position,
-                    m_checkpoints[0].transform.position);
+                Gizmos.DrawLine(Checkpoints[size - 1].transform.position,
+                    Checkpoints[0].transform.position);
                 continue;
             }
 
-            Gizmos.DrawLine(m_checkpoints[i - 1].transform.position, m_checkpoints[i].transform.position);
+            Gizmos.DrawLine(Checkpoints[i - 1].transform.position, Checkpoints[i].transform.position);
         }
     }
 }

@@ -29,11 +29,9 @@ public class AntPlayer : MonoBehaviour
     {
         if (Input.GetButtonDown("Call"))
         {
-            var pos = transform.position;
-
             foreach (var ant in AntAgent.s_instances)
             {
-                
+                ant.BeginRace();
             }
 
             FireParticles();
