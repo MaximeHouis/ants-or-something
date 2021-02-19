@@ -33,8 +33,7 @@ public class AntPlayer : MonoBehaviour
 
             foreach (var ant in AntAgent.s_instances)
             {
-                var point = Random.insideUnitCircle * 2f;
-                StartCoroutine(ant.SetDestination(pos + new Vector3(point.x, 0, point.y)));
+                
             }
 
             FireParticles();

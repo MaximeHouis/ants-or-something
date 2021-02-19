@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using Random = UnityEngine.Random;
 
-[RequireComponent(typeof(NavMeshAgent))]
+[RequireComponent(typeof(NavMeshAgent), typeof(CheckpointTracker))]
 public class AntAgent : MonoBehaviour
 {
     public static readonly List<AntAgent> s_instances = new List<AntAgent>();
@@ -15,10 +15,10 @@ public class AntAgent : MonoBehaviour
 
     [HideInInspector] public NavMeshAgent m_agent;
 
+    private CheckpointTracker m_checkpointTracker;
     private MeshRenderer m_renderer;
     private bool m_touchedGround;
-    private Vector3? m_destination = null;
-    private AntClass m_class;
+    private Vector3? m_destination;
 
     private void Start()
     {
@@ -26,6 +26,7 @@ public class AntAgent : MonoBehaviour
 
         m_agent = GetComponent<NavMeshAgent>();
         m_renderer = GetComponent<MeshRenderer>();
+        m_checkpointTracker = GetComponent<CheckpointTracker>();
 
         SetColor();
     }
@@ -41,6 +42,11 @@ public class AntAgent : MonoBehaviour
             m_agent.ResetPath();
     }
 
+    public void StartRace()
+    {
+        
+    }
+
     private void OnCollisionEnter(Collision _)
     {
         if (m_touchedGround)
@@ -49,27 +55,10 @@ public class AntAgent : MonoBehaviour
         m_touchedGround = true;
     }
 
-    public void AssignClass(Dictionary<AntClass, float> ratios, uint index, uint count)
-    {
-        // ex: 0.2907795, 0.4834647, 0.8584071, 1
-
-        var range = index / (double) count;
-
-        foreach (var ratio in ratios.Where(ratio => range < ratio.Value))
-        {
-            m_class = ratio.Key;
-            // StartCoroutine(SetColor());
-
-            return;
-        }
-
-        throw new IndexOutOfRangeException("Ratio error");
-    }
-
     public IEnumerator SetDestination(Vector3 dest)
     {
         while (!m_touchedGround)
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForFixedUpdate();
 
         m_agent.enabled = true;
         m_agent.ResetPath(); // in case an old path was set
