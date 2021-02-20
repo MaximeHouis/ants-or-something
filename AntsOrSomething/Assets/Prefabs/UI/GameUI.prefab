@@ -346,3 +346,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TimerText: {fileID: 3223187081838061953}
   CountdownText: {fileID: 5857208621389951151}
+  m_pauseMenuPrefab: {fileID: 5242309814001894191, guid: a81773b429079994982617dbab1a8118,
+    type: 3}
