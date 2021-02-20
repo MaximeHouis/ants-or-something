@@ -30,7 +30,7 @@ public class CheckpointTracker : MonoBehaviour
         if (m_index == i || Finished)
             return;
 
-        CurrentTime = CheckpointSystem.Instance.Chrono.Elapsed;
+        CurrentTime = CheckpointSystem.Instance.Elapsed;
         m_index = i;
 
         if (i == 0)

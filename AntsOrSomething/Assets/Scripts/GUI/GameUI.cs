@@ -23,7 +23,7 @@ public class GameUI : MonoBehaviour
     public void Update()
     {
         var reference = !m_playerTracker.Finished
-            ? CheckpointSystem.Instance.Chrono.Elapsed
+            ? CheckpointSystem.Instance.Elapsed
             : m_playerTracker.CurrentTime;
 
         TimerText.text = "Time: " + reference.ToString("c");

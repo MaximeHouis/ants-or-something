@@ -9,13 +9,17 @@ public class CheckpointSystem : MonoBehaviour
     public static CheckpointSystem Instance;
 
     public List<Checkpoint> Checkpoints { get; } = new List<Checkpoint>();
-    [NonSerialized] public readonly Stopwatch Chrono = new Stopwatch();
+
+    public TimeSpan Elapsed => new TimeSpan((long) (m_elapsedTime * 1e7f)); // 10'000'000 ticks in 1 second
 
     [Header("Core")]
     public uint m_lapCount = 3;
 
     [Header("Finish Line")]
     public GameObject m_particles;
+
+    private float m_elapsedTime;
+    private bool m_started;
 
     private void Awake()
     {
@@ -30,16 +34,22 @@ public class CheckpointSystem : MonoBehaviour
         {
             StartCoroutine(antAgent.Countdown());
         }
-        
+
         yield return AntPlayer.Instance.Countdown();
-        
-        Chrono.Start();
+
+        m_started = true;
         FireParticles(Checkpoints[0].transform.position);
         StartCoroutine(AntPlayer.Instance.BeginRace());
         foreach (var antAgent in AntAgent.s_instances)
         {
             StartCoroutine(antAgent.BeginRace());
         }
+    }
+
+    private void Update()
+    {
+        if (m_started)
+            m_elapsedTime += Time.deltaTime;
     }
 
     private void FireParticles(Vector3 position)
@@ -56,7 +66,7 @@ public class CheckpointSystem : MonoBehaviour
     public void UpdateIndicesAndNames()
     {
         Checkpoints.Clear();
-        
+
         foreach (var checkpoint in GetComponentsInChildren<Checkpoint>())
         {
             Checkpoints.Add(checkpoint);
@@ -71,7 +81,7 @@ public class CheckpointSystem : MonoBehaviour
         for (var i = 0; i < size; i++)
         {
             var index = i + 1 < size ? (uint) i : uint.MaxValue;
-            
+
             Checkpoints[i].Index = index;
             Checkpoints[i].name = $"Checkpoint {index}";
             Checkpoints[i].Next = i + 1 < size ? Checkpoints[i + 1] : Checkpoints[0];
