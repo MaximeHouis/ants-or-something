@@ -21,15 +21,8 @@ public class Checkpoint : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         var tracker = other.GetComponent<CheckpointTracker>();
-        var antAgent = other.GetComponent<AntAgent>();
 
-        if (!tracker)
-            return;
-
-        if (antAgent)
-        {
-            antAgent.NextCheckpoint();
-        }
+        tracker.SetIndex(Index);
     }
 
     private void OnDrawGizmos()

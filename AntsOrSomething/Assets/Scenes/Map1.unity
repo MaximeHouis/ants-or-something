@@ -22703,6 +22703,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 499792473417746266, guid: 14f70c5e5e84c1c4da300857c228beb6,
+        type: 3}
+      propertyPath: m_flTransform
+      value: 
+      objectReference: {fileID: 2012590616}
     - target: {fileID: 3749466004704527699, guid: 14f70c5e5e84c1c4da300857c228beb6,
         type: 3}
       propertyPath: m_Name
@@ -23349,7 +23354,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-166304
+  m_Name: pb_Mesh15812
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -23360,7 +23365,7 @@ Mesh:
     firstVertex: 0
     vertexCount: 4
     localAABB:
-      m_Center: {x: 4, y: 0, z: 0.5}
+      m_Center: {x: 0, y: 0, z: 0}
       m_Extent: {x: 4, y: 0, z: 0.5}
   m_Shapes:
     vertices: []
@@ -23440,7 +23445,7 @@ Mesh:
       format: 0
       dimension: 0
     m_DataSize: 192
-    _typelessdata: 000000000000000000000000000000000000803f000000000000803f0000000000000000000080bf000000000000000000000000000000000000803f000000000000803f000000000000803f0000000000000000000080bf000000000000803f000000410000000000000000000000000000803f000000000000803f0000000000000000000080bf000000410000000000000041000000000000803f000000000000803f000000000000803f0000000000000000000080bf000000410000803f
+    _typelessdata: 000080c000000000000000bf000000000000803f000000000000803f0000000000000000000080bf000080c0000000bf000080c0000000000000003f000000000000803f000000000000803f0000000000000000000080bf000080c00000003f0000804000000000000000bf000000000000803f000000000000803f0000000000000000000080bf00008040000000bf00008040000000000000003f000000000000803f000000000000803f0000000000000000000080bf000080400000003f
   m_CompressedMesh:
     m_Vertices:
       m_NumItems: 0
@@ -23494,7 +23499,7 @@ Mesh:
       m_BitSize: 0
     m_UVInfo: 0
   m_LocalAABB:
-    m_Center: {x: 4, y: 0, z: 0.5}
+    m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 4, y: 0, z: 0.5}
   m_MeshUsageFlags: 0
   m_BakedConvexCollisionMesh: 
@@ -26680,15 +26685,15 @@ MonoBehaviour:
   - m_Vertices: 03000000
   m_SharedTextures: []
   m_Positions:
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 1}
-  - {x: 8, y: 0, z: 0}
-  - {x: 8, y: 0, z: 1}
+  - {x: -4, y: 0, z: -0.5}
+  - {x: -4, y: 0, z: 0.5}
+  - {x: 4, y: 0, z: -0.5}
+  - {x: 4, y: 0, z: 0.5}
   m_Textures0:
-  - {x: 0, y: 0}
-  - {x: 0, y: 1}
-  - {x: 8, y: 0}
-  - {x: 8, y: 1}
+  - {x: -4, y: -0.5}
+  - {x: -4, y: 0.5}
+  - {x: 4, y: -0.5}
+  - {x: 4, y: 0.5}
   m_Textures2: []
   m_Textures3: []
   m_Tangents:
@@ -26717,7 +26722,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2012590611}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.01, z: 20}
+  m_LocalPosition: {x: 4, y: 0.01, z: 20.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
