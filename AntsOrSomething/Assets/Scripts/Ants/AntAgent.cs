@@ -14,11 +14,9 @@ public enum AntClass
 }
 
 [RequireComponent(typeof(NavMeshAgent), typeof(CheckpointTracker))]
-public class AntAgent : MonoBehaviour
+public class AntAgent : MonoBehaviour, IAntRacer
 {
     public static readonly List<AntAgent> s_instances = new List<AntAgent>();
-
-    public bool m_selected;
 
     [HideInInspector] public NavMeshAgent m_agent;
 
@@ -46,28 +44,12 @@ public class AntAgent : MonoBehaviour
         s_instances.Remove(this);
     }
 
-    // private void Update()
-    // {
-    //     if (m_destination.HasValue && Vector3.Distance(transform.position, (Vector3) m_destination) <= 0.1f)
-    //         m_agent.ResetPath();
-    // }
-
-    public void BeginRace()
+    private IEnumerator GoToNextCheckpoint()
     {
-        GoToNextCheckpoint();
-    }
+        var next = m_currentCheckpoint ? m_currentCheckpoint.Next : CheckpointSystem.Instance.Checkpoints[1];
 
-    private void GoToNextCheckpoint()
-    {
-        var next = m_currentCheckpoint ? m_currentCheckpoint.Next : CheckpointSystem.Instance.Checkpoints[0];
-
-        StartCoroutine(SetDestination(Utils.RandomPointInBox(next.Box)));
+        yield return SetDestination(Utils.RandomPointInBox(next.Box));
         m_currentCheckpoint = next;
-    }
-
-    public void NextCheckpoint()
-    {
-        GoToNextCheckpoint();
     }
 
     private void OnCollisionEnter()
@@ -76,6 +58,32 @@ public class AntAgent : MonoBehaviour
             return;
 
         m_touchedGround = true;
+    }
+
+    public IEnumerator BeginRace()
+    {
+        yield return GoToNextCheckpoint();
+    }
+
+    public IEnumerator Countdown()
+    {
+        yield break;
+    }
+
+    public IEnumerator NewCheckpoint(uint index)
+    {
+        yield return GoToNextCheckpoint();
+    }
+
+    public IEnumerator NewLap(int index, uint count)
+    {
+        yield break;
+    }
+
+    public IEnumerator Finished()
+    {
+        yield return new WaitForSeconds(1);
+        m_agent.enabled = false;
     }
 
     public IEnumerator SetDestination(Vector3 dest)
@@ -88,11 +96,6 @@ public class AntAgent : MonoBehaviour
         m_agent.SetDestination(dest);
 
         m_destination = dest;
-    }
-
-    public void SetSelected(bool value)
-    {
-        m_selected = value;
     }
 
     private void SetColor()

@@ -1,35 +1,32 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 [RequireComponent(typeof(Rigidbody))]
-public class AntPlayer : MonoBehaviour
+public class AntPlayer : MonoBehaviour, IAntRacer
 {
+    public static AntPlayer Instance;
+    
     [Header("Player statistics")]
     [Min(0)] public float m_speed = 10f;
 
     [Min(0)] public float m_rotationSpeed = 15f;
 
-    [FormerlySerializedAs("m_particles")] [Header("Finish Line")]
-    public GameObject m_flParticles;
-
-    public Transform m_flTransform;
-
-    private ParticleSystem m_particleSystem;
 
     private Rigidbody m_rigidbody;
     private Vector3 m_targetAngle = Vector3.zero;
     private bool m_canMove;
 
+    private void Awake()
+    {
+        Instance = this;
+    }
+
     private void Start()
     {
         m_rigidbody = GetComponent<Rigidbody>();
-
-        if (m_flParticles)
-            m_particleSystem = m_flParticles.GetComponent<ParticleSystem>();
-
-        StartCoroutine(Countdown());
     }
 
     private void FixedUpdate()
@@ -65,31 +62,19 @@ public class AntPlayer : MonoBehaviour
             Time.fixedDeltaTime * m_rotationSpeed);
     }
 
-    private void FireParticles(Vector3 position)
-    {
-        if (!m_flParticles)
-            return;
-
-        var system = Instantiate(m_flParticles, position, Quaternion.identity);
-
-        Destroy(system, 5f);
-    }
-
-    private void BeginRace()
+    public IEnumerator BeginRace()
     {
         m_canMove = true;
 
-        foreach (var antAgent in AntAgent.s_instances)
-        {
-            antAgent.BeginRace();
-        }
+        yield return new WaitForSeconds(2);
+        GameUI.Instance.CountdownText.text = "";
     }
 
-    private IEnumerator Countdown()
+    public IEnumerator Countdown()
     {
         yield return new WaitForFixedUpdate();
+        
         GameUI.Instance.CountdownText.text = "Ready";
-
         yield return new WaitForSeconds(1);
         
         GameUI.Instance.CountdownText.text = "3";
@@ -101,19 +86,24 @@ public class AntPlayer : MonoBehaviour
         GameUI.Instance.CountdownText.text = "1";
         yield return new WaitForSeconds(1);
 
-        BeginRace();
-        FireParticles(m_flTransform.position);
         GameUI.Instance.CountdownText.text = "GO!";
-
-        yield return new WaitForSeconds(2);
-        
-        GameUI.Instance.CountdownText.text = "";
     }
 
-    public IEnumerator NewLap()
+    public IEnumerator NewCheckpoint(uint index)
     {
-        GameUI.Instance.CountdownText.text = "New Lap!";
+        yield break;
+    }
+
+    public IEnumerator NewLap(int index, uint count)
+    {
+        GameUI.Instance.CountdownText.text = $"Lap {index}/{count}!";
         yield return new WaitForSeconds(2);
         GameUI.Instance.CountdownText.text = "";
+    }
+    
+    public IEnumerator Finished()
+    {
+        yield return new WaitForSeconds(1);
+        m_canMove = false;
     }
 }

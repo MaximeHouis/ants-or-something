@@ -35,9 +35,11 @@ public class CheckpointTracker : MonoBehaviour
     //     }
     // }
 
+    private IAntRacer m_racer;
     private AntAgent m_agent;
     private AntPlayer m_player;
     private uint m_index;
+    private int m_lap;
 
     private void Awake()
     {
@@ -46,37 +48,30 @@ public class CheckpointTracker : MonoBehaviour
 
         if (m_agent && m_player)
             throw new MissingComponentException("AntAgent and AntPlayer are mutually exclusive");
+
+        m_racer = m_agent ? (IAntRacer) m_agent : m_player;
+        
+        m_racer.BeginRace();
     }
 
     public void SetIndex(uint i)
     {
-        if (m_player && m_index == i)
+        if (m_index == i)
             return;
-        
+
         m_index = i;
 
         if (i == 0)
         {
+            var count = CheckpointSystem.Instance.m_lapCount;
+            var finished = m_lap == count;
+
+            m_lap += 1;
+            
             // TODO: Particle effect?
-            NewLap();
+            StartCoroutine(finished ? m_racer.Finished() : m_racer.NewLap(m_lap + 1, count));
         }
 
-        NewCheckpoint();
-    }
-
-    private void NewLap()
-    {
-        if (m_player)
-        {
-            StartCoroutine(m_player.NewLap());
-        }
-    }
-
-    private void NewCheckpoint()
-    {
-        if (m_agent)
-        {
-            m_agent.NextCheckpoint();
-        }
+        StartCoroutine(m_racer.NewCheckpoint(i));
     }
 }
