@@ -14,8 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_speed: 12.5
   m_rotationSpeed: 20
-  m_particles: {fileID: 3996852385631663542, guid: d1d31aad30df8ba47a2178d4834bc1f0,
-    type: 3}
 --- !u!1001 &5666058398227605551
 PrefabInstance:
   m_ObjectHideFlags: 0
