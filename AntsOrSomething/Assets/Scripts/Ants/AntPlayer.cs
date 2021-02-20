@@ -99,8 +99,15 @@ public class AntPlayer : MonoBehaviour, IAntRacer
 
     public IEnumerator Finished()
     {
-        GameUI.Instance.m_textCountdown.text = "Finished!";
+        GameUI.Instance.m_textCountdown.text = $"Finished!\nResults incoming\nPhoto finish...";
+
         yield return new WaitForSeconds(0.5f);
         m_canMove = false;
+
+        var position = CheckpointTracker.Instances.IndexOf(GetComponent<CheckpointTracker>()) + 1;
+        var total = CheckpointSystem.Instance.EntityCount;
+        var result = position == 1 ? "You won! Congratulations!" : "You lost, better luck next time!";
+
+        GameUI.Instance.m_textCountdown.text = $"Finished!\nYou arrived {position} out of {total}!\n{result}";
     }
 }
