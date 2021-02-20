@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class CheckpointSystem : MonoBehaviour
 {
@@ -9,10 +10,12 @@ public class CheckpointSystem : MonoBehaviour
 
     public List<Checkpoint> Checkpoints { get; } = new List<Checkpoint>();
 
+    public int EntityCount => CheckpointTracker.Instances.Count;
+
     public TimeSpan Elapsed => new TimeSpan((long) (m_elapsedTime * 1e7f)); // 10'000'000 ticks in 1 second
 
-    [Header("Core")]
-    public uint m_lapCount = 3;
+    [FormerlySerializedAs("m_lapCount")] [Header("Core")]
+    public uint LapCount = 3;
 
     [Header("Finish Line")]
     public GameObject m_particles;
@@ -43,12 +46,34 @@ public class CheckpointSystem : MonoBehaviour
         {
             StartCoroutine(antAgent.BeginRace());
         }
+
+        InvokeRepeating(nameof(UpdatePositions), 0f, 0.2f);
     }
 
     private void Update()
     {
         if (m_started)
             m_elapsedTime += Time.deltaTime;
+    }
+
+    private void UpdatePositions()
+    {
+        CheckpointTracker.Instances.Sort((a, b) =>
+        {
+            if (a.Finished && b.Finished)
+                return a.CurrentTime.CompareTo(b.CurrentTime);
+            if (a.Finished)
+                return -1;
+            if (b.Finished)
+                return 1;
+
+            var compare = b.Lap.CompareTo(a.Lap);
+            if (compare != 0)
+                return compare;
+
+            compare = b.CheckpointIndex.CompareTo(a.CheckpointIndex);
+            return compare != 0 ? compare : a.Distance.CompareTo(b.Distance);
+        });
     }
 
     private void FireParticles(Vector3 position)

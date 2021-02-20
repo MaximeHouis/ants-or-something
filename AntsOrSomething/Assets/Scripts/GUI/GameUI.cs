@@ -1,12 +1,15 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class GameUI : MonoBehaviour
 {
     public static GameUI Instance;
 
-    public Text TimerText;
-    public Text CountdownText;
+    public Text m_textTimer;
+    public Text m_textLap;
+    public Text m_textPosition;
+    public Text m_textCountdown;
     public GameObject m_pauseMenuPrefab;
 
     private AntPlayer m_antPlayer;
@@ -31,8 +34,13 @@ public class GameUI : MonoBehaviour
         var reference = !m_playerTracker.Finished
             ? CheckpointSystem.Instance.Elapsed
             : m_playerTracker.CurrentTime;
+        var lapCount = CheckpointSystem.Instance.LapCount;
 
-        TimerText.text = "Time: " + reference.ToString("c");
+        m_textTimer.text = "Time: " + reference.ToString("c");
+        m_textLap.text = "Lap:      " + $"{Math.Min(m_playerTracker.Lap + 1, lapCount)}/{lapCount}";
+        m_textPosition.text = "Position: " +
+                              $"{CheckpointTracker.Instances.IndexOf(m_playerTracker) + 1}/" +
+                              $"{CheckpointSystem.Instance.EntityCount}";
     }
 
     public void TogglePause()

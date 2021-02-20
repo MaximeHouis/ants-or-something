@@ -63,26 +63,26 @@ public class AntPlayer : MonoBehaviour, IAntRacer
         m_canMove = true;
 
         yield return new WaitForSeconds(2);
-        GameUI.Instance.CountdownText.text = "";
+        GameUI.Instance.m_textCountdown.text = "";
     }
 
     public IEnumerator Countdown()
     {
         yield return new WaitForFixedUpdate();
 
-        GameUI.Instance.CountdownText.text = "Ready";
+        GameUI.Instance.m_textCountdown.text = "Ready";
         yield return new WaitForSeconds(1);
 
-        GameUI.Instance.CountdownText.text = "3";
+        GameUI.Instance.m_textCountdown.text = "3";
         yield return new WaitForSeconds(1);
 
-        GameUI.Instance.CountdownText.text = "2";
+        GameUI.Instance.m_textCountdown.text = "2";
         yield return new WaitForSeconds(1);
 
-        GameUI.Instance.CountdownText.text = "1";
+        GameUI.Instance.m_textCountdown.text = "1";
         yield return new WaitForSeconds(1);
 
-        GameUI.Instance.CountdownText.text = "GO!";
+        GameUI.Instance.m_textCountdown.text = "GO!";
     }
 
     public IEnumerator NewCheckpoint(uint index)
@@ -92,14 +92,14 @@ public class AntPlayer : MonoBehaviour, IAntRacer
 
     public IEnumerator NewLap(int index, uint count)
     {
-        GameUI.Instance.CountdownText.text = $"Lap {index}/{count}!";
+        GameUI.Instance.m_textCountdown.text = $"Lap {index}/{count}!";
         yield return new WaitForSeconds(2);
-        GameUI.Instance.CountdownText.text = "";
+        GameUI.Instance.m_textCountdown.text = "";
     }
 
     public IEnumerator Finished()
     {
-        GameUI.Instance.CountdownText.text = "Finished!";
+        GameUI.Instance.m_textCountdown.text = "Finished!";
         yield return new WaitForSeconds(0.5f);
         m_canMove = false;
     }
