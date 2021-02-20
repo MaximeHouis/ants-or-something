@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using UnityEngine;
 
 public class CheckpointSystem : MonoBehaviour
@@ -8,14 +9,13 @@ public class CheckpointSystem : MonoBehaviour
     public static CheckpointSystem Instance;
 
     public List<Checkpoint> Checkpoints { get; } = new List<Checkpoint>();
+    [NonSerialized] public readonly Stopwatch Chrono = new Stopwatch();
 
     [Header("Core")]
     public uint m_lapCount = 3;
 
     [Header("Finish Line")]
     public GameObject m_particles;
-
-    private ParticleSystem m_particleSystem;
 
     private void Awake()
     {
@@ -26,16 +26,14 @@ public class CheckpointSystem : MonoBehaviour
 
     private IEnumerator Start()
     {
-        if (m_particles)
-            m_particleSystem = m_particles.GetComponent<ParticleSystem>();
-
         foreach (var antAgent in AntAgent.s_instances)
         {
             StartCoroutine(antAgent.Countdown());
         }
         
         yield return AntPlayer.Instance.Countdown();
-
+        
+        Chrono.Start();
         FireParticles(Checkpoints[0].transform.position);
         StartCoroutine(AntPlayer.Instance.BeginRace());
         foreach (var antAgent in AntAgent.s_instances)

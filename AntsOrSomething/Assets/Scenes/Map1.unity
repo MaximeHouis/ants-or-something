@@ -64171,21 +64171,6 @@ PrefabInstance:
       propertyPath: m_Size.z
       value: 6
       objectReference: {fileID: 0}
-    - target: {fileID: 4983790288630961103, guid: 2a68fd57b604a6c4bbbd349a4a35659e,
-        type: 3}
-      propertyPath: m_count
-      value: 49
-      objectReference: {fileID: 0}
-    - target: {fileID: 4983790288630961103, guid: 2a68fd57b604a6c4bbbd349a4a35659e,
-        type: 3}
-      propertyPath: m_duration
-      value: 0.25
-      objectReference: {fileID: 0}
-    - target: {fileID: 4983790288630961103, guid: 2a68fd57b604a6c4bbbd349a4a35659e,
-        type: 3}
-      propertyPath: m_colonyConfig
-      value: 
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2a68fd57b604a6c4bbbd349a4a35659e, type: 3}
 --- !u!1001 &5240640207862421411
