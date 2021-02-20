@@ -15,14 +15,9 @@ public class MainMenu : MonoBehaviour
         m_versionText.text = Application.version;
     }
 
-    public void Map1()
+    public void LoadMap(int index)
     {
-        SceneManager.LoadScene(1);
-    }
-
-    public void Map2()
-    {
-        SceneManager.LoadScene(2);
+        SceneManager.LoadScene(index);
     }
     
     public void Exit()

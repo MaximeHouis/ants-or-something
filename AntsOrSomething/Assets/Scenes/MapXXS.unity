@@ -121,7 +121,7 @@ NavMeshSettings:
     accuratePlacement: 1
     debug:
       m_Flags: 0
-  m_NavMeshData: {fileID: 23800000, guid: c8af5ab5b7d825043b6df599bcf4e384, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: f944c7cd8a20ada4e8b69094eaccbdb2, type: 2}
 --- !u!1 &78603637
 GameObject:
   m_ObjectHideFlags: 0
@@ -2958,7 +2958,7 @@ PrefabInstance:
     - target: {fileID: 5843426500590463377, guid: 5ece2238d39aea94db37cf013c9f8b7a,
         type: 3}
       propertyPath: m_Name
-      value: MainUI
+      value: GameUI
       objectReference: {fileID: 0}
     - target: {fileID: 9147358457346956451, guid: 5ece2238d39aea94db37cf013c9f8b7a,
         type: 3}
