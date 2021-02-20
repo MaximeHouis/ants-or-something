@@ -63,11 +63,11 @@ public class CheckpointTracker : MonoBehaviour
 
         if (i == 0)
         {
+            m_lap += 1;
+            
             var count = CheckpointSystem.Instance.m_lapCount;
             var finished = m_lap == count;
 
-            m_lap += 1;
-            
             // TODO: Particle effect?
             StartCoroutine(finished ? m_racer.Finished() : m_racer.NewLap(m_lap + 1, count));
         }

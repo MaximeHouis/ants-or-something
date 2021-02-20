@@ -23354,7 +23354,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh15812
+  m_Name: pb_Mesh36216
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -26578,7 +26578,6 @@ GameObject:
   - component: {fileID: 2012590615}
   - component: {fileID: 2012590614}
   - component: {fileID: 2012590613}
-  - component: {fileID: 2012590612}
   m_Layer: 0
   m_Name: FinishLine
   m_TagString: Untagged
@@ -26586,20 +26585,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!64 &2012590612
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2012590611}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 1788050778}
 --- !u!33 &2012590613
 MeshFilter:
   m_ObjectHideFlags: 10
@@ -27520,16 +27505,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Size.z
       value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 4983790288630961103, guid: 2a68fd57b604a6c4bbbd349a4a35659e,
-        type: 3}
-      propertyPath: m_count
-      value: 49
-      objectReference: {fileID: 0}
-    - target: {fileID: 4983790288630961103, guid: 2a68fd57b604a6c4bbbd349a4a35659e,
-        type: 3}
-      propertyPath: m_duration
-      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 4983790288630961103, guid: 2a68fd57b604a6c4bbbd349a4a35659e,
         type: 3}

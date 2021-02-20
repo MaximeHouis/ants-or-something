@@ -103,6 +103,7 @@ public class AntPlayer : MonoBehaviour, IAntRacer
     
     public IEnumerator Finished()
     {
+        GameUI.Instance.CountdownText.text = "Finished!";
         yield return new WaitForSeconds(1);
         m_canMove = false;
     }

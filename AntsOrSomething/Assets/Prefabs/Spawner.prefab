@@ -68,6 +68,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_entity: {fileID: 3749466004704527699, guid: a64eb4724b2972f40a1255cfbe6b5d9a,
     type: 3}
-  m_count: 128
-  m_duration: 0.75
-  m_colonyConfig: {fileID: 0}
+  m_count: 100
+  m_duration: 1
+  m_spawnOnStart: 1
