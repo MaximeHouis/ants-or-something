@@ -21,22 +21,7 @@ public class CheckpointSystem : MonoBehaviour
     {
         Instance = this;
 
-        foreach (var checkpoint in GetComponentsInChildren<Checkpoint>())
-        {
-            Checkpoints.Add(checkpoint);
-        }
-
-        if (Checkpoints.Count < 2)
-            throw new ArgumentOutOfRangeException($"At least 2 checkpoints are needed");
-
-        Checkpoints.Sort((a, b) => a.Index > b.Index ? 1 : -1);
-
-        var size = Checkpoints.Count;
-        for (var i = 0; i < size; i++)
-        {
-            Checkpoints[i].Index = (uint) i;
-            Checkpoints[i].Next = i + 1 < size ? Checkpoints[i + 1] : Checkpoints[0];
-        }
+        UpdateIndicesAndNames();
     }
 
     private IEnumerator Start()
@@ -67,6 +52,32 @@ public class CheckpointSystem : MonoBehaviour
         var system = Instantiate(m_particles, position, Quaternion.identity);
 
         Destroy(system, 7.5f);
+    }
+
+    [ContextMenu("UpdateIndicesAndNames()")]
+    public void UpdateIndicesAndNames()
+    {
+        Checkpoints.Clear();
+        
+        foreach (var checkpoint in GetComponentsInChildren<Checkpoint>())
+        {
+            Checkpoints.Add(checkpoint);
+        }
+
+        if (Checkpoints.Count < 2)
+            throw new ArgumentOutOfRangeException($"At least 2 checkpoints are needed");
+
+        Checkpoints.Sort((a, b) => a.Index > b.Index ? 1 : -1);
+
+        var size = Checkpoints.Count;
+        for (var i = 0; i < size; i++)
+        {
+            var index = i + 1 < size ? (uint) i : uint.MaxValue;
+            
+            Checkpoints[i].Index = index;
+            Checkpoints[i].name = $"Checkpoint {index}";
+            Checkpoints[i].Next = i + 1 < size ? Checkpoints[i + 1] : Checkpoints[0];
+        }
     }
 
     private void OnDrawGizmosSelected()

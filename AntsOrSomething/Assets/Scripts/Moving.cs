@@ -7,6 +7,7 @@ public class Moving : MonoBehaviour
     public Vector3 m_offsetRotation = Vector3.zero;
     public Vector3 m_offsetScale = Vector3.zero;
     public float m_duration = 1f;
+    public float m_offset;
     public bool m_loop = true;
 
     private Vector3 m_fromPosition;
@@ -16,7 +17,6 @@ public class Moving : MonoBehaviour
     private Vector3 m_toRotation;
     private Vector3 m_toScale;
 
-    private float m_offset;
     private Rigidbody m_rigidbody;
 
     private void Start()
