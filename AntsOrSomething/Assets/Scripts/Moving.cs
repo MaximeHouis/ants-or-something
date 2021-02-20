@@ -53,7 +53,6 @@ public class Moving : MonoBehaviour
         m_rigidbody.MovePosition(Vector3.Lerp(m_fromPosition, m_toPosition, offset));
         m_rigidbody.MoveRotation(Quaternion.Euler(Vector3.Lerp(m_fromRotation, m_toRotation, offset)));
         transform.localScale = Vector3.Lerp(m_fromScale, m_toScale, offset);
-        
     }
 
     private void RefreshData()

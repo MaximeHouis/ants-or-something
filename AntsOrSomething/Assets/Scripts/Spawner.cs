@@ -13,14 +13,14 @@ public class Spawner : MonoBehaviour
     public float m_duration = 2.0f;
 
     public bool m_spawnOnStart = true;
-    
+
     private float Interval => m_count != 0 ? m_duration / m_count : 0f;
     private BoxCollider m_collider;
 
     private void Start()
     {
         m_collider = GetComponent<BoxCollider>();
-        
+
         if (m_spawnOnStart)
             Spawn();
     }

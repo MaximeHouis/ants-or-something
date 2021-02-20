@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class MainMenu : MonoBehaviour
 {
-
     public Text m_versionText;
 
     private void Awake()
@@ -19,7 +15,7 @@ public class MainMenu : MonoBehaviour
     {
         SceneManager.LoadScene(index);
     }
-    
+
     public void Exit()
     {
         Application.Quit();

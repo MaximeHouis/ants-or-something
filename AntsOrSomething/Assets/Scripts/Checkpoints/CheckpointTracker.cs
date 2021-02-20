@@ -11,7 +11,7 @@ public class CheckpointTracker : MonoBehaviour
 
     [NonSerialized] public bool Finished;
     [NonSerialized] public TimeSpan CurrentTime;
-    
+
     private void Awake()
     {
         m_agent = GetComponent<AntAgent>();
@@ -21,7 +21,7 @@ public class CheckpointTracker : MonoBehaviour
             throw new MissingComponentException("AntAgent and AntPlayer are mutually exclusive");
 
         m_racer = m_agent ? (IAntRacer) m_agent : m_player;
-        
+
         m_racer.BeginRace();
     }
 
@@ -36,7 +36,7 @@ public class CheckpointTracker : MonoBehaviour
         if (i == 0)
         {
             m_lap += 1;
-            
+
             var count = CheckpointSystem.Instance.m_lapCount;
             Finished = m_lap == count;
 

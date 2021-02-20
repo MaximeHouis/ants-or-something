@@ -1,19 +1,15 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
-using UnityEngine.Serialization;
-using Random = UnityEngine.Random;
 
 [RequireComponent(typeof(Rigidbody))]
 public class AntPlayer : MonoBehaviour, IAntRacer
 {
     public static AntPlayer Instance;
-    
+
     [Header("Player statistics")]
     [Min(0)] public float m_speed = 10f;
 
     [Min(0)] public float m_rotationSpeed = 15f;
-
 
     private Rigidbody m_rigidbody;
     private Vector3 m_targetAngle = Vector3.zero;
@@ -39,9 +35,9 @@ public class AntPlayer : MonoBehaviour, IAntRacer
     {
         if (!m_canMove)
             return;
-        
+
         // No need for fixed delta time because we want an instant move
-        
+
         var x = Input.GetAxis("Horizontal") * m_speed;
         var z = Input.GetAxis("Vertical") * m_speed;
         var velocity = new Vector3(x, m_rigidbody.velocity.y, z);
@@ -50,7 +46,7 @@ public class AntPlayer : MonoBehaviour, IAntRacer
 
         if (x == 0 && z == 0)
             return;
-        
+
         var localAngle = transform.localEulerAngles;
         localAngle.y = Mathf.Atan2(x, z) * Mathf.Rad2Deg;
         m_targetAngle = localAngle;
@@ -73,16 +69,16 @@ public class AntPlayer : MonoBehaviour, IAntRacer
     public IEnumerator Countdown()
     {
         yield return new WaitForFixedUpdate();
-        
+
         GameUI.Instance.CountdownText.text = "Ready";
         yield return new WaitForSeconds(1);
-        
+
         GameUI.Instance.CountdownText.text = "3";
         yield return new WaitForSeconds(1);
-        
+
         GameUI.Instance.CountdownText.text = "2";
         yield return new WaitForSeconds(1);
-        
+
         GameUI.Instance.CountdownText.text = "1";
         yield return new WaitForSeconds(1);
 
@@ -100,7 +96,7 @@ public class AntPlayer : MonoBehaviour, IAntRacer
         yield return new WaitForSeconds(2);
         GameUI.Instance.CountdownText.text = "";
     }
-    
+
     public IEnumerator Finished()
     {
         GameUI.Instance.CountdownText.text = "Finished!";
