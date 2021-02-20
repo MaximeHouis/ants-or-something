@@ -82,7 +82,7 @@ public class AntAgent : MonoBehaviour, IAntRacer
 
     public IEnumerator Finished()
     {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(0.5f);
         m_agent.enabled = false;
     }
 
