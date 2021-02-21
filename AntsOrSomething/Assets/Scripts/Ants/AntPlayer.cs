@@ -27,15 +27,15 @@ public class AntPlayer : MonoBehaviour, IAntRacer
 
     private void FixedUpdate()
     {
+        if (!m_canMove)
+            return;
+
         MoveAnt();
         RotateAnt();
     }
 
     private void MoveAnt()
     {
-        if (!m_canMove)
-            return;
-
         // No need for fixed delta time because we want an instant move
 
         var x = Input.GetAxis("Horizontal") * m_speed;

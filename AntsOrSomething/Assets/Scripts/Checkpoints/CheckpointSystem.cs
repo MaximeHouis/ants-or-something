@@ -32,6 +32,8 @@ public class CheckpointSystem : MonoBehaviour
 
     private IEnumerator Start()
     {
+        InvokeRepeating(nameof(UpdatePositions), 0f, 0.2f);
+
         foreach (var antAgent in AntAgent.s_instances)
         {
             StartCoroutine(antAgent.Countdown());
@@ -46,8 +48,6 @@ public class CheckpointSystem : MonoBehaviour
         {
             StartCoroutine(antAgent.BeginRace());
         }
-
-        InvokeRepeating(nameof(UpdatePositions), 0f, 0.2f);
     }
 
     private void Update()

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
-public class Moving : MonoBehaviour
+public class MovingObject : MonoBehaviour
 {
     public Vector3 m_offsetPosition = Vector3.zero;
     public Vector3 m_offsetRotation = Vector3.zero;

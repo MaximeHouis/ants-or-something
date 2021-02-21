@@ -11,6 +11,8 @@ public class GameUI : MonoBehaviour
     public Text m_textPosition;
     public Text m_textCountdown;
     public GameObject m_pauseMenuPrefab;
+    public Color m_firstColor;
+    public Color m_lastColor;
 
     private AntPlayer m_antPlayer;
     private CheckpointTracker m_playerTracker;
@@ -35,12 +37,13 @@ public class GameUI : MonoBehaviour
             ? CheckpointSystem.Instance.Elapsed
             : m_playerTracker.CurrentTime;
         var lapCount = CheckpointSystem.Instance.LapCount;
+        var pos = CheckpointTracker.Instances.IndexOf(m_playerTracker) + 1;
+        var total = CheckpointSystem.Instance.EntityCount;
 
         m_textTimer.text = "Time: " + reference.ToString("c");
-        m_textLap.text = "Lap:      " + $"{Math.Min(m_playerTracker.Lap + 1, lapCount)}/{lapCount}";
-        m_textPosition.text = "Position: " +
-                              $"{CheckpointTracker.Instances.IndexOf(m_playerTracker) + 1}/" +
-                              $"{CheckpointSystem.Instance.EntityCount}";
+        m_textLap.text = "Lap: " + $"{Math.Min(m_playerTracker.Lap + 1, lapCount)}/{lapCount}";
+        m_textPosition.text = $"Position:\n{pos}/{total}";
+        m_textPosition.color = Color.Lerp(m_firstColor, m_lastColor, pos / (float) total);
     }
 
     public void TogglePause()
