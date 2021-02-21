@@ -1,6 +1,5 @@
 ﻿using System;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public enum Difficulty
@@ -26,7 +25,7 @@ public class MainMenu : MonoBehaviour
 
     public void LoadMap(int index)
     {
-        SceneManager.LoadScene(index);
+        SceneLoader.Instance.LoadScene(index);
     }
 
     public void Exit()
