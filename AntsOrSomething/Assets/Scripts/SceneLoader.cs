@@ -16,12 +16,11 @@ public class SceneLoader : MonoBehaviour
         Instance = this;
     }
 
-#if UNITY_EDITOR
     private void Update()
     {
+        // Hides the transition in edit mode
         m_animator.gameObject.SetActive(Application.isPlaying);
     }
-#endif
 
     private void OnDestroy()
     {
