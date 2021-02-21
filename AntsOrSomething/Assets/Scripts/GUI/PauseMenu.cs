@@ -8,6 +8,12 @@ public class PauseMenu : MonoBehaviour
         GameUI.Instance.TogglePause();
     }
 
+    public void Restart()
+    {
+        Resume();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
     public void MainMenu()
     {
         Resume();

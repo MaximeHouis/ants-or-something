@@ -1,7 +1,9 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using Random = UnityEngine.Random;
 
 public enum AntClass
 {
@@ -16,7 +18,9 @@ public class AntAgent : MonoBehaviour, IAntRacer
 {
     public static readonly List<AntAgent> s_instances = new List<AntAgent>();
 
-    [HideInInspector] public NavMeshAgent m_agent;
+    public List<float> m_speedPerDifficulty;
+
+    [NonSerialized] public NavMeshAgent m_agent;
 
     private CheckpointTracker m_checkpointTracker;
     private Checkpoint m_currentCheckpoint;
@@ -26,7 +30,7 @@ public class AntAgent : MonoBehaviour, IAntRacer
     [Tooltip("Changing this has no effect, debug only")]
     public Vector3 m_destination;
 
-    private void Start()
+    private void Awake()
     {
         s_instances.Add(this);
 
@@ -35,6 +39,8 @@ public class AntAgent : MonoBehaviour, IAntRacer
         m_checkpointTracker = GetComponent<CheckpointTracker>();
 
         SetColor();
+
+        m_agent.speed = m_speedPerDifficulty[(int) MainMenu.LocalDifficulty];
     }
 
     private void OnDestroy()
