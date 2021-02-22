@@ -4,7 +4,6 @@ using UnityEngine;
 
 public static class Extensions
 {
-    // TODO: Customizable from Unity
     public static Color Color(this AntClass antClass)
     {
         switch (antClass)

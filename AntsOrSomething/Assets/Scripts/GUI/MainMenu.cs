@@ -47,7 +47,7 @@ public class MainMenu : MonoBehaviour
                 LocalDifficulty = Difficulty.Hard;
                 break;
             default:
-                throw new NotImplementedException($"Difficulty {value} not implemented");
+                throw new ArgumentOutOfRangeException($"Difficulty {value} not implemented");
         }
     }
 }
