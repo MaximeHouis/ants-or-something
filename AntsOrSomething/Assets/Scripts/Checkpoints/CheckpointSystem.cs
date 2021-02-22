@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
 
+[SelectionBase]
 public class CheckpointSystem : MonoBehaviour
 {
     public static CheckpointSystem Instance;
@@ -86,7 +87,7 @@ public class CheckpointSystem : MonoBehaviour
         Destroy(system, 7.5f);
     }
 
-    [ContextMenu("UpdateIndicesAndNames()")]
+    [ContextMenu("Update Indices, Names and Sibling Index")]
     public void UpdateIndicesAndNames()
     {
         Checkpoints.Clear();
@@ -109,7 +110,20 @@ public class CheckpointSystem : MonoBehaviour
             Checkpoints[i].Index = index;
             Checkpoints[i].name = $"Checkpoint {index}";
             Checkpoints[i].Next = i + 1 < size ? Checkpoints[i + 1] : Checkpoints[0];
+            Checkpoints[i].transform.SetSiblingIndex(i);
         }
+    }
+
+    [ContextMenu("Insert Checkpoint")]
+    public void InsertCheckpoint()
+    {
+        for (uint i = 0; i < transform.childCount; i++)
+        {
+            var index = i + 1 < transform.childCount ? i : uint.MaxValue;
+            transform.GetChild((int) i).GetComponent<Checkpoint>().Index = index;
+        }
+
+        UpdateIndicesAndNames();
     }
 
     private void OnDrawGizmosSelected()

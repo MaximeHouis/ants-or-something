@@ -21,7 +21,8 @@ public class Checkpoint : MonoBehaviour
     {
         var tracker = other.GetComponent<CheckpointTracker>();
 
-        tracker.SetIndex(Index);
+        if (tracker)
+            tracker.SetIndex(Index);
     }
 
     private void OnDrawGizmos()

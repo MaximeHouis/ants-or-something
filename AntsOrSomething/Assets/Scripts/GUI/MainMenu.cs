@@ -11,7 +11,7 @@ public enum Difficulty
 
 public class MainMenu : MonoBehaviour
 {
-    public static Difficulty LocalDifficulty = Difficulty.Easy;
+    public static Difficulty LocalDifficulty = Difficulty.Medium;
 
     public Dropdown m_difficultyDropdown;
     public Text m_versionText;
