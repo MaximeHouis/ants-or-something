@@ -35,7 +35,7 @@ public class SceneLoader : MonoBehaviour
     private IEnumerator Load(int index)
     {
         m_animator.SetTrigger(Fade);
-        yield return new WaitForSeconds(.2f);
+        yield return new WaitForSeconds(.5f);
         SceneManager.LoadScene(index);
     }
 }
