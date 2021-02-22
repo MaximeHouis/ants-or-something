@@ -22,7 +22,6 @@ public class AntAgent : MonoBehaviour, IAntRacer
 
     [NonSerialized] public NavMeshAgent m_agent;
 
-    private CheckpointTracker m_checkpointTracker;
     private Checkpoint m_currentCheckpoint;
     private MeshRenderer m_renderer;
     private bool m_touchedGround;
@@ -36,7 +35,6 @@ public class AntAgent : MonoBehaviour, IAntRacer
 
         m_agent = GetComponent<NavMeshAgent>();
         m_renderer = GetComponent<MeshRenderer>();
-        m_checkpointTracker = GetComponent<CheckpointTracker>();
 
         SetColor();
 
@@ -86,7 +84,7 @@ public class AntAgent : MonoBehaviour, IAntRacer
 
     public IEnumerator Finished()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(Random.Range(0.25f, 0.75f));
         m_agent.enabled = false;
     }
 

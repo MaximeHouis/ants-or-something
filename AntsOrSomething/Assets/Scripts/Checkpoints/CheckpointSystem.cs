@@ -18,11 +18,16 @@ public class CheckpointSystem : MonoBehaviour
     [FormerlySerializedAs("m_lapCount")] [Header("Core")]
     public uint LapCount = 3;
 
-    [Header("Finish Line")]
-    public GameObject m_particles;
+    [Header("Particles")]
+    public GameObject m_start;
+
+    public GameObject m_checkpoint;
+    public GameObject m_finish;
 
     private float m_elapsedTime;
     private bool m_started;
+
+    [NonSerialized] public bool FirstFinished;
 
     private void Awake()
     {
@@ -79,12 +84,10 @@ public class CheckpointSystem : MonoBehaviour
 
     private void FireParticles(Vector3 position)
     {
-        if (!m_particles)
+        if (!m_start)
             return;
 
-        var system = Instantiate(m_particles, position, Quaternion.identity);
-
-        Destroy(system, 7.5f);
+        Instantiate(m_start, position, Quaternion.identity);
     }
 
     [ContextMenu("Update Indices, Names and Sibling Index")]

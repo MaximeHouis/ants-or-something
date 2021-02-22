@@ -58,6 +58,15 @@ public class CheckpointTracker : MonoBehaviour
             Finished = Lap == count;
 
             StartCoroutine(Finished ? m_racer.Finished() : m_racer.NewLap(Lap + 1, count));
+
+            if (!Finished)
+                Instantiate(CheckpointSystem.Instance.m_checkpoint, transform);
+
+            if (Finished && !CheckpointSystem.Instance.FirstFinished)
+            {
+                CheckpointSystem.Instance.FirstFinished = true;
+                Instantiate(CheckpointSystem.Instance.m_finish, transform.position, Quaternion.identity);
+            }
         }
 
         StartCoroutine(m_racer.NewCheckpoint(i));

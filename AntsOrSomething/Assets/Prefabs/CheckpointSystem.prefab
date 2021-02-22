@@ -43,6 +43,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b5df58272635d540b49e6b4ef814771, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_lapCount: 3
-  m_particles: {fileID: 3996852385631663542, guid: d1d31aad30df8ba47a2178d4834bc1f0,
+  LapCount: 3
+  m_start: {fileID: 3996852385631663542, guid: d1d31aad30df8ba47a2178d4834bc1f0, type: 3}
+  m_checkpoint: {fileID: 7723512752378624605, guid: 0ce79b0b9ccd73244a8d32f8f94cb6d1,
+    type: 3}
+  m_finish: {fileID: 3996852385631663542, guid: 8883417d6e39c824881d5d876707b3b9,
     type: 3}
