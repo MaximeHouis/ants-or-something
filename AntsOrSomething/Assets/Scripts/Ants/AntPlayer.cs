@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
@@ -70,18 +71,31 @@ public class AntPlayer : MonoBehaviour, IAntRacer
     {
         yield return new WaitForFixedUpdate();
 
+        var audioSource = GameUI.Instance.GetComponent<AudioSource>();
+        var deltaPitch = 1.1f;
+
+        if (!audioSource)
+            throw new NullReferenceException();
+
         GameUI.Instance.m_textCountdown.text = "Ready";
         yield return new WaitForSeconds(1);
 
+        audioSource.Play();
         GameUI.Instance.m_textCountdown.text = "3";
         yield return new WaitForSeconds(1);
 
+        audioSource.pitch *= deltaPitch;
+        audioSource.Play();
         GameUI.Instance.m_textCountdown.text = "2";
         yield return new WaitForSeconds(1);
 
+        audioSource.pitch *= deltaPitch;
+        audioSource.Play();
         GameUI.Instance.m_textCountdown.text = "1";
         yield return new WaitForSeconds(1);
 
+        audioSource.pitch *= deltaPitch;
+        audioSource.Play();
         GameUI.Instance.m_textCountdown.text = "GO!";
     }
 
