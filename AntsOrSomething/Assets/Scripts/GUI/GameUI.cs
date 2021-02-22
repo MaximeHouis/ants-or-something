@@ -45,7 +45,7 @@ public class GameUI : MonoBehaviour
             : m_playerTracker.CurrentTime;
         var lapCount = CheckpointSystem.Instance.LapCount;
         var pos = CheckpointTracker.Instances.IndexOf(m_playerTracker) + 1;
-        var total = CheckpointSystem.Instance.EntityCount;
+        var total = CheckpointSystem.EntityCount;
 
         m_textTimer.text = "Time: " + reference.ToString("c");
         m_textLap.text = "Lap: " + $"{Math.Min(m_playerTracker.Lap + 1, lapCount)}/{lapCount}";

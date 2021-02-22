@@ -11,7 +11,7 @@ public class CheckpointSystem : MonoBehaviour
 
     public List<Checkpoint> Checkpoints { get; } = new List<Checkpoint>();
 
-    public int EntityCount => CheckpointTracker.Instances.Count;
+    public static int EntityCount => CheckpointTracker.Instances.Count;
 
     public TimeSpan Elapsed => new TimeSpan((long) (m_elapsedTime * 1e7f)); // 10'000'000 ticks in 1 second
 
@@ -38,6 +38,9 @@ public class CheckpointSystem : MonoBehaviour
 
     private IEnumerator Start()
     {
+        while (IntroCamera.Active)
+            yield return new WaitForFixedUpdate();
+
         InvokeRepeating(nameof(UpdatePositions), 0f, 0.2f);
 
         foreach (var antAgent in AntAgent.s_instances)

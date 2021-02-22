@@ -72,7 +72,7 @@ public class AntPlayer : MonoBehaviour, IAntRacer
         yield return new WaitForFixedUpdate();
 
         var audioSource = GameUI.Instance.GetComponent<AudioSource>();
-        var deltaPitch = 1.1f;
+        const float deltaPitch = 1.1f;
 
         if (!audioSource)
             throw new NullReferenceException();
@@ -119,7 +119,7 @@ public class AntPlayer : MonoBehaviour, IAntRacer
         m_canMove = false;
 
         var position = CheckpointTracker.Instances.IndexOf(GetComponent<CheckpointTracker>()) + 1;
-        var total = CheckpointSystem.Instance.EntityCount;
+        var total = CheckpointSystem.EntityCount;
         var result = position == 1 ? "You won! Congratulations!" : "You lost, better luck next time!";
 
         GameUI.Instance.m_textCountdown.text = $"Finished!\nYou arrived {position} out of {total}!\n{result}";
