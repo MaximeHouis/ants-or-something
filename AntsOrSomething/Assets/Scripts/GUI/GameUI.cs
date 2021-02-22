@@ -26,6 +26,13 @@ public class GameUI : MonoBehaviour
 
         m_antPlayer = AntPlayer.Instance;
         m_playerTracker = m_antPlayer.GetComponent<CheckpointTracker>();
+
+        Cursor.visible = false;
+    }
+
+    private void OnDestroy()
+    {
+        Cursor.visible = true;
     }
 
     public void Update()
@@ -59,5 +66,6 @@ public class GameUI : MonoBehaviour
 
         m_paused = !m_paused;
         Time.timeScale = m_paused ? 0f : 1f;
+        Cursor.visible = m_paused;
     }
 }

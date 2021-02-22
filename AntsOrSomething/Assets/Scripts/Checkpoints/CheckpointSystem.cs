@@ -108,7 +108,7 @@ public class CheckpointSystem : MonoBehaviour
             var index = i + 1 < size ? (uint) i : uint.MaxValue;
 
             Checkpoints[i].Index = index;
-            Checkpoints[i].name = $"Checkpoint {index}";
+            Checkpoints[i].name = $"Checkpoint {index:D2}";
             Checkpoints[i].Next = i + 1 < size ? Checkpoints[i + 1] : Checkpoints[0];
             Checkpoints[i].transform.SetSiblingIndex(i);
         }

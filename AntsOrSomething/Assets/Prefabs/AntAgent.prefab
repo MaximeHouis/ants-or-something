@@ -50,9 +50,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_speedPerDifficulty:
-  - 11
   - 11.5
   - 12
+  - 12.5
   m_destination: {x: 0, y: 0, z: 0}
 --- !u!1001 &5666058398227605551
 PrefabInstance:
