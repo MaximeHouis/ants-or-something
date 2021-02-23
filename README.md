@@ -1,9 +1,13 @@
 # Ants, or something
-###### Compete, with ants, against ants
+###### Compete, with ants, against ants.
 
 ## What?
 
-*Ants, or something* is a project made for educational purpose.
+*Ants, or something* is a project made for educational purpose. The goal was to do crowd interactions so I used lots of ants!
+
+## Controls
+
+Playing with a controller is recommended, but you can also play with the arrow keys or WASD.
 
 ## Credits
 
@@ -25,3 +29,5 @@ I used the following free assets to build this project:
     * https://freesound.org/people/16FThumaF/sounds/505264/
     * https://freesound.org/people/MrAuralization/sounds/212677/
     * https://freesound.org/people/InspectorJ/sounds/403011/
+
+Thank you to the artists! You made my programming job easier! :)
