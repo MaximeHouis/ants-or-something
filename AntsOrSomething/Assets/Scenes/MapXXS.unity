@@ -1467,7 +1467,7 @@ PrefabInstance:
     - target: {fileID: 4742906939822326145, guid: 833f35b873453044fb86c8d5c3d50488,
         type: 3}
       propertyPath: m_Name
-      value: Checkpoint 2
+      value: Checkpoint 02
       objectReference: {fileID: 0}
     - target: {fileID: 4742906939822326146, guid: 833f35b873453044fb86c8d5c3d50488,
         type: 3}
@@ -2133,7 +2133,7 @@ PrefabInstance:
     - target: {fileID: 4742906939822326145, guid: 833f35b873453044fb86c8d5c3d50488,
         type: 3}
       propertyPath: m_Name
-      value: Checkpoint 0
+      value: Checkpoint 00
       objectReference: {fileID: 0}
     - target: {fileID: 4742906939822326156, guid: 833f35b873453044fb86c8d5c3d50488,
         type: 3}
@@ -3207,7 +3207,7 @@ PrefabInstance:
     - target: {fileID: 4742906939822326145, guid: 833f35b873453044fb86c8d5c3d50488,
         type: 3}
       propertyPath: m_Name
-      value: Checkpoint 1
+      value: Checkpoint 01
       objectReference: {fileID: 0}
     - target: {fileID: 4742906939822326146, guid: 833f35b873453044fb86c8d5c3d50488,
         type: 3}
@@ -6007,7 +6007,7 @@ PrefabInstance:
     - target: {fileID: 8662890769478629892, guid: 8f767f8ebece2fd4490c6b815174bb92,
         type: 3}
       propertyPath: LapCount
-      value: 6
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 8662890769478629892, guid: 8f767f8ebece2fd4490c6b815174bb92,
         type: 3}
