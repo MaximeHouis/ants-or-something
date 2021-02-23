@@ -11,6 +11,8 @@ I used the following free assets to build this project:
 
 * Font
     * [**JetBrains Mono**](https://www.jetbrains.com/lp/mono/)
+* Model
+    * https://sketchfab.com/3d-models/lowpoly-ant-cb84febbdce54d0d9c3cfcf2401ccccc
 * Textures
     * https://3dtextures.me/2019/03/01/ground-dirt-006/
     * https://3dtextures.me/2020/06/25/stylized-sand-001/
