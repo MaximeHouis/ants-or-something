@@ -67,18 +67,4 @@ public class MovingObject : MonoBehaviour
         m_toRotation = m_fromRotation + m_offsetRotation;
         m_toScale = m_fromScale + m_offsetScale;
     }
-
-    private void OnDrawGizmos()
-    {
-        // var meshCollider = GetComponent<MeshCollider>();
-        //
-        // if (!meshCollider)
-        //     return;
-        //
-        // Gizmos.color = Color.red * new Color(1, 1, 1, 0.33333f);
-        // Gizmos.DrawMesh(meshCollider.sharedMesh,
-        //     m_originalPosition + m_offsetPosition,
-        //     Quaternion.Euler(m_originalRotation + m_offsetRotation),
-        //     m_originalScale + m_offsetScale);
-    }
 }
