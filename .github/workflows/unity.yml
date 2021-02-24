@@ -20,7 +20,7 @@ jobs:
       fail-fast: false
       matrix:
         path: ["AntsOrSomething"]
-        version: ["2019.4.20f1"]
+        version: ["2019.4.19f1"]  # TODO: update version to .20f1 when available
         target: ["StandaloneWindows64", "StandaloneLinux64", "StandaloneOSX"]
     
     steps:
@@ -41,6 +41,7 @@ jobs:
           projectPath: ${{ matrix.path }}
           unityVersion: ${{ matrix.version }}
           targetPlatform: ${{ matrix.target }}
+          versioning: Custom
       
       - name: Upload Artifacts
         uses: actions/upload-artifact@v2
