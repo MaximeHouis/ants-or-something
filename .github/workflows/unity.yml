@@ -41,6 +41,7 @@ jobs:
           projectPath: ${{ matrix.path }}
           unityVersion: ${{ matrix.version }}
           targetPlatform: ${{ matrix.target }}
+          allowDirtyBuild: true  # fixes CRLF/LF conversion errors
 
       - name: List files
         run: find .
