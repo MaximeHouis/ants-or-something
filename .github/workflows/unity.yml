@@ -20,7 +20,7 @@ jobs:
       fail-fast: false
       matrix:
         path: ["AntsOrSomething"]
-        version: ["auto"]  # Looks for the Project Settings version
+        version: ["2019.4.20f1"]
         target: ["StandaloneWindows64", "StandaloneLinux64", "StandaloneOSX"]
     
     steps:
