@@ -1,7 +1,3 @@
-# Custom
-*  eol=lf
-.* eol=lf
-
 ### From https://github.com/alexkaratarakis/gitattributes/blob/master/Unity.gitattributes
 
 # Unity
@@ -128,3 +124,11 @@
 
 # Spine export file for Unity
 *.skel.bytes        binary
+
+#####################################################
+
+# Custom
+*  eol=lf
+.* eol=lf
+
+LightingData.asset  binary
