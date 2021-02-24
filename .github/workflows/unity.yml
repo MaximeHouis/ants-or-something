@@ -1,0 +1,49 @@
+name: Unity Build CI
+
+on:
+  push:
+  release:
+    types: [published]
+
+env:
+  UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  build:
+    name: ${{ matrix.path }} | ${{ matrix.target }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        path: ["AntsOrSomething"]
+        version: ["auto"]  # Looks for the Project Settings version
+        target: ["StandaloneWindows64", "StandaloneLinux64", "StandaloneOSX"]
+    
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          lfs: true
+          submodules: true
+
+      # TODO: Cache?
+
+      - name: Unity Build
+        uses: game-ci/unity-builder@v2
+        with:
+          projectPath: ${{ matrix.path }}
+          unityVersion: ${{ matrix.version }}
+          targetPlatform: ${{ matrix.target }}
+      
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: ${{ matrix.path }}.${{ matrix.target }}
+          path: build/${{ matrix.target }}
+          retention-days: 7
+          if-no-files-found: error
+
+      # TODO: upload binaries on release
