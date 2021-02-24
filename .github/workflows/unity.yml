@@ -2,6 +2,15 @@ name: Unity Build
 
 on:
   push:
+    branches:
+      - main
+      - master
+      - develop
+  pull_request:
+    branches:
+      - main
+      - master
+      - develop
   release:
     types: [ published ]
 
