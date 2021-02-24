@@ -43,10 +43,6 @@ jobs:
           targetPlatform: ${{ matrix.target }}
           allowDirtyBuild: true  # fixes CRLF/LF conversion errors
 
-      - name: List files
-        run: find .
-        if: always()
-
       - name: Upload Artifacts
         uses: actions/upload-artifact@v2
         with:
