@@ -41,8 +41,7 @@ jobs:
           projectPath: ${{ matrix.path }}
           unityVersion: ${{ matrix.version }}
           targetPlatform: ${{ matrix.target }}
-          versioning: Custom
-      
+
       - name: List files
         run: find .
         if: always()
@@ -51,7 +50,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: ${{ matrix.path }}.${{ matrix.target }}
-          path: build
+          path: build/${{ matrix.target }}
           retention-days: 7
           if-no-files-found: error
 
