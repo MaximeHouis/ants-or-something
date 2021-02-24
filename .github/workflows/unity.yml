@@ -1,4 +1,4 @@
-name: Unity Build CI
+name: Unity Build
 
 on:
   push:
@@ -14,7 +14,7 @@ defaults:
 
 jobs:
   build:
-    name: ${{ matrix.path }} | ${{ matrix.target }}
+    name: ${{ matrix.path }} / ${{ matrix.target }}
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -31,8 +31,8 @@ jobs:
 
       # TODO: Cache?
 
-      - name: Unity Build
-        uses: game-ci/unity-builder@v2
+      - name: Unity Builder
+        uses: game-ci/unity-builder@v2.0-alpha-6
         with:
           projectPath: ${{ matrix.path }}
           unityVersion: ${{ matrix.version }}
