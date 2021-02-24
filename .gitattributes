@@ -1,4 +1,8 @@
-﻿### From https://github.com/alexkaratarakis/gitattributes/blob/master/Unity.gitattributes
+# Custom
+*  eol=lf
+.* eol=lf
+
+### From https://github.com/alexkaratarakis/gitattributes/blob/master/Unity.gitattributes
 
 # Unity
 *.cginc              text
