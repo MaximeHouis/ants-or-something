@@ -29,7 +29,11 @@ jobs:
           lfs: true
           submodules: true
 
-      # TODO: Cache?
+      - name: Cache
+        uses: actions/cache@v2.1.4
+        with:
+          path: ${{ matrix.path }}/Library
+          key: ${{ matrix.path }}-${{ matrix.version }}-${{ matrix.target }}
 
       - name: Unity Builder
         uses: game-ci/unity-builder@v2.0-alpha-6
@@ -37,6 +41,7 @@ jobs:
           projectPath: ${{ matrix.path }}
           unityVersion: ${{ matrix.version }}
           targetPlatform: ${{ matrix.target }}
+          versioning: None
       
       - name: Upload Artifacts
         uses: actions/upload-artifact@v2
