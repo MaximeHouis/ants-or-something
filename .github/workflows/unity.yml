@@ -44,7 +44,7 @@ jobs:
           versioning: Custom
       
       - name: List files
-        runs: find .
+        run: find .
         if: always()
 
       - name: Upload Artifacts
