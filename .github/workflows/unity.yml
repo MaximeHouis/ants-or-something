@@ -51,7 +51,7 @@ jobs:
         with:
           name: ${{ matrix.path }}.${{ matrix.target }}
           path: build/${{ matrix.target }}
-          retention-days: 7
+          retention-days: 28
           if-no-files-found: error
 
       # TODO: upload binaries on release
