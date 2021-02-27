@@ -1,4 +1,4 @@
-﻿### From https://github.com/alexkaratarakis/gitattributes/blob/master/Unity.gitattributes
+﻿# From https://github.com/alexkaratarakis/gitattributes/blob/master/Unity.gitattributes
 
 # Unity
 *.cginc              text
@@ -124,3 +124,9 @@
 
 # Spine export file for Unity
 *.skel.bytes        binary
+
+##########################################################
+
+# Custom
+Terrain.asset       binary
+LightingData.asset  binary
