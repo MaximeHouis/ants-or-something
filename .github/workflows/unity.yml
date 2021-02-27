@@ -36,6 +36,19 @@ jobs:
           submodules: true
           fetch-depth: 0  # game-ci/unity-builder optionally needs the whole history, for auto versioning
 
+      - name: Paths Changes Filter
+        uses: dorny/paths-filter@v2.9.0
+        id: changes
+        with:
+          initial-fetch-depth: 2
+          base: '${{ github.ref }}'
+          filters: |
+            path:
+              - '${{ matrix.path }}'
+            workflow:
+              - '.github/workflows/unity.yml'
+        if: github.event_name != 'release'
+
       - name: Cache
         uses: actions/cache@v2.1.4
         with:
@@ -52,6 +65,7 @@ jobs:
           unityVersion: ${{ matrix.version }}
           targetPlatform: ${{ matrix.target }}
           # allowDirtyBuild: true  # fixes CRLF/LF conversion errors, but dirty
+        if: (github.event_name == 'release' && github.event.action == 'published') || steps.changes.outputs.path == 'true' || steps.changes.outputs.workflow == 'true'
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v2
@@ -60,6 +74,7 @@ jobs:
           path: build/${{ matrix.target }}
           retention-days: 28
           if-no-files-found: error
+        if: (github.event_name == 'release' && github.event.action == 'published') || steps.changes.outputs.path == 'true' || steps.changes.outputs.workflow == 'true'
 
       - name: Zip for Release
         run: |
