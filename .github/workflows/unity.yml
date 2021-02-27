@@ -29,7 +29,7 @@ jobs:
         with:
           lfs: true
           submodules: true
-          fetch-depth: 0  # game-ci/unity-builder optionally needs the whole history, for auto versioning
+          # fetch-depth: 0  # game-ci/unity-builder optionally needs the whole history, for auto versioning
 
       - name: Paths Changes Filter
         uses: dorny/paths-filter@v2.9.0
@@ -48,7 +48,10 @@ jobs:
         uses: actions/cache@v2.1.4
         with:
           path: ${{ matrix.path }}/Library
-          key: ${{ matrix.path }}-${{ matrix.version }}-${{ matrix.target }}
+          key: ${{ matrix.target }}-${{ matrix.path }}-${{ matrix.version }}
+          restore-keys: |
+            ${{ matrix.target }}-${{ matrix.path }}-
+            ${{ matrix.target }}-
 
       - name: Unity Builder
         uses: game-ci/unity-builder@v2.0-alpha-6
