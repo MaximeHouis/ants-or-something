@@ -2,12 +2,7 @@ name: Unity Build
 
 on:
   push:
-    branches:
-      - main
-      - master
-      - develop
-  pull_request:
-    branches:
+    branches-ignore:
       - main
       - master
       - develop
