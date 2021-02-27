@@ -1,7 +1,6 @@
 # Ants, or something
 ###### Compete, with ants, against ants.
 
-
 ## What?
 
 *Ants, or something* is a project made for educational purpose. The goal was to do crowd interactions so I used lots of ants!
