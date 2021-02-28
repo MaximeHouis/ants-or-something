@@ -52,6 +52,7 @@ jobs:
           # restore-keys: |
           #   ${{ matrix.target }}-${{ matrix.path }}-
           #   ${{ matrix.target }}-
+        if: (github.event_name == 'release' && github.event.action == 'published') || steps.changes.outputs.path == 'true' || steps.changes.outputs.workflow == 'true'
 
       - name: Unity Builder
         uses: game-ci/unity-builder@v2.0-alpha-6
