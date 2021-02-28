@@ -77,7 +77,7 @@ jobs:
       - name: Zip for Release
         run: |
           cd build/
-          zip -r "${{ matrix.path }}.${{ matrix.target }}.zip" "${{ matrix.target }}"
+          sudo zip -r "${{ matrix.path }}.${{ matrix.target }}.zip" "${{ matrix.target }}"
         if: github.event_name == 'release' && github.event.action == 'published'
 
       - name: Upload Artifact to Release
