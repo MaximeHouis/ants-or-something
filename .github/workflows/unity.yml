@@ -49,9 +49,9 @@ jobs:
         with:
           path: ${{ matrix.path }}/Library
           key: ${{ matrix.target }}-${{ matrix.path }}-${{ matrix.version }}
-          restore-keys: |
-            ${{ matrix.target }}-${{ matrix.path }}-
-            ${{ matrix.target }}-
+          # restore-keys: |
+          #   ${{ matrix.target }}-${{ matrix.path }}-
+          #   ${{ matrix.target }}-
 
       - name: Unity Builder
         uses: game-ci/unity-builder@v2.0-alpha-6
