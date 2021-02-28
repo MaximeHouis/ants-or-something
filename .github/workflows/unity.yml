@@ -74,10 +74,11 @@ jobs:
           if-no-files-found: error
         if: (github.event_name == 'release' && github.event.action == 'published') || steps.changes.outputs.path == 'true' || steps.changes.outputs.workflow == 'true'
 
-      - name: Zip for Release
+      - name: Prepare for Release
         run: |
           cd build/
           sudo zip -r "${{ matrix.path }}.${{ matrix.target }}.zip" "${{ matrix.target }}"
+          sudo mv "${{ matrix.path }}.${{ matrix.target }}.zip" ../
         if: github.event_name == 'release' && github.event.action == 'published'
 
       - name: Upload Artifact to Release
