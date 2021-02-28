@@ -62,6 +62,7 @@ jobs:
           projectPath: ${{ matrix.path }}
           unityVersion: ${{ matrix.version }}
           targetPlatform: ${{ matrix.target }}
+          versioning: None  # use version set in the builder
           # allowDirtyBuild: true  # fixes CRLF/LF conversion errors, but dirty
         if: (github.event_name == 'release' && github.event.action == 'published') || steps.changes.outputs.path == 'true' || steps.changes.outputs.workflow == 'true'
 
@@ -70,7 +71,7 @@ jobs:
         with:
           name: ${{ matrix.path }}.${{ matrix.target }}
           path: build/${{ matrix.target }}
-          retention-days: 28
+          retention-days: 14
           if-no-files-found: error
         if: (github.event_name == 'release' && github.event.action == 'published') || steps.changes.outputs.path == 'true' || steps.changes.outputs.workflow == 'true'
 
