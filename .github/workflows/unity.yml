@@ -29,13 +29,13 @@ jobs:
         with:
           lfs: true
           submodules: true
-          # fetch-depth: 0  # game-ci/unity-builder optionally needs the whole history, for auto versioning
+          fetch-depth: 5  # Give dorny/paths-filter enough history to check changes, otherwise it will pull by itself.
 
       - name: Paths Changes Filter
         uses: dorny/paths-filter@v2.9.0
         id: changes
         with:
-          initial-fetch-depth: 2
+          initial-fetch-depth: 5
           base: '${{ github.ref }}'
           filters: |
             path:
