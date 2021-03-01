@@ -31,6 +31,11 @@ jobs:
           submodules: true
           fetch-depth: 5  # Give dorny/paths-filter enough history to check changes, otherwise it will pull by itself.
 
+      - name: Setup Action Variables
+        id: vars
+        run: |
+          echo "::set-output name=version::$(git describe --tags)"
+
       - name: Paths Changes Filter
         uses: dorny/paths-filter@v2.9.0
         id: changes
@@ -63,7 +68,8 @@ jobs:
           projectPath: ${{ matrix.path }}
           unityVersion: ${{ matrix.version }}
           targetPlatform: ${{ matrix.target }}
-          versioning: None  # use version set in the builder
+          versioning: Custom
+          version: ${{ steps.vars.outputs.version }}
           # allowDirtyBuild: true  # fixes CRLF/LF conversion errors, but dirty
         if: (github.event_name == 'release' && github.event.action == 'published') || steps.changes.outputs.path == 'true' || steps.changes.outputs.workflow == 'true'
 
