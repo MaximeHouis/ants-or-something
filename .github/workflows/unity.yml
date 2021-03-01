@@ -29,18 +29,18 @@ jobs:
         with:
           lfs: true
           submodules: true
-          fetch-depth: 5  # Give dorny/paths-filter enough history to check changes, otherwise it will pull by itself.
+          fetch-depth: 0  # Give dorny/paths-filter enough history to check changes, otherwise it will pull by itself.
 
       - name: Setup Action Variables
         id: vars
         run: |
-          echo "::set-output name=version::$(git describe --tags)"
+          echo "::set-output name=version::$(git describe --tags || echo "v0.0")"
 
       - name: Paths Changes Filter
         uses: dorny/paths-filter@v2.9.0
         id: changes
         with:
-          initial-fetch-depth: 5
+          initial-fetch-depth: 0
           base: '${{ github.ref }}'
           filters: |
             path:
